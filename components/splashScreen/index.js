@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    fontSize: 32
+    fontSize: 32,
+    fontFamily: 'MochiyPopOne'
   },
   logo: {
     resizeMode: 'contain',
