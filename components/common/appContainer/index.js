@@ -3,6 +3,7 @@ import { SafeAreaView, View, Text, StatusBar, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
 import UserDetailsDisplay from '../../../components/common/userDisplay'
 import { setUserDetails } from '../../../redux/actions/userActions'
+import MainScreen from '../../mainScreen'
 
 export default function AppContainer() {
   const dispatch = useDispatch()
@@ -13,9 +14,7 @@ export default function AppContainer() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style='auto' />
-      <UserDetailsDisplay />
-      <Text>Open up App.js to start working on your app!</Text>
+      <MainScreen />
     </SafeAreaView>
   )
 }
