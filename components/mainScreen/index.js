@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   card: {
     margin: 10,
-  }
+  },
 });
 
 export default MainScreen;

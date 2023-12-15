@@ -6,7 +6,7 @@ const SplashScreen = ({ navigation }) => {
     const timer = setTimeout(() => {
       navigation.replace('Main');
     }, 3000);
-    
+
     return () => clearTimeout(timer);
   }, [navigation]);
 
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 20,
     fontSize: 32,
-    fontFamily: 'MochiyPopOne'
+    fontFamily: 'MochiyPopOne',
   },
   logo: {
     resizeMode: 'contain',
     width: '120%',
     marginBottom: 20,
-  }
+  },
 });
 
 export default SplashScreen;

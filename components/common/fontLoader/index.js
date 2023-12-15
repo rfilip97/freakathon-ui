@@ -4,7 +4,7 @@ import AppLoading from 'expo-app-loading';
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    'MochiyPopOne': require('../../../assets/fonts/MochiyPopOne-Regular.ttf'),
+    MochiyPopOne: require('../../../assets/fonts/MochiyPopOne-Regular.ttf'),
   });
 };
 

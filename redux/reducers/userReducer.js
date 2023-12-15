@@ -1,18 +1,18 @@
 const initialState = {
   firstName: '',
-  lastName: ''
+  lastName: '',
 };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
-      case 'SET_USER_DETAILS':
-          return {
-              ...state,
-              firstName: action.payload.firstName,
-              lastName: action.payload.lastName
-          };
-      default:
-          return state;
+    case 'SET_USER_DETAILS':
+      return {
+        ...state,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+      };
+    default:
+      return state;
   }
 }
 
