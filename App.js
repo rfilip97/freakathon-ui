@@ -1,15 +1,20 @@
-import React from 'react'
-import { Provider as PaperProvider } from 'react-native-paper';
-import { Provider as ReduxProvider } from 'react-redux';
-import store from './redux/store/store'
-import AppContainer from './components/common/appContainer'
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SplashScreen from './components/splashScreen';
+import MainScreen from './components/mainScreen';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <ReduxProvider store={store}>
-      <PaperProvider>
-        <AppContainer />
-      </PaperProvider>
-    </ReduxProvider>
-  )
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Main" component={MainScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
+
+export default App;
