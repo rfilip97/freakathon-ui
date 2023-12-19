@@ -1,12 +1,13 @@
-import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Provider as ReduxProvider } from 'react-redux';
+import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import SplashScreen from './components/splashScreen';
-import store from './redux/store/store';
-import useFonts from './hooks/useFonts';
+import { Provider as ReduxProvider } from 'react-redux';
+import ChatScreen from './components/chatScreen';
 import MainTabNavigator from './components/common/mainTabNavigator';
+import SplashScreen from './components/splashScreen';
+import useFonts from './hooks/useFonts';
+import store from './redux/store/store';
 
 const RootStack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const App = () => {
           <RootStack.Navigator screenOptions={{ headerShown: false }}>
             <RootStack.Screen name="Splash" component={SplashScreen} />
             <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
+            <RootStack.Screen name="Chat" component={ChatScreen} />
           </RootStack.Navigator>
         </NavigationContainer>
       </PaperProvider>

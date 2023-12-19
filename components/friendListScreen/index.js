@@ -25,11 +25,11 @@ const friends = [
   },
 ];
 
-const FriendListScreen = () => {
+const FriendListScreen = ({ navigation }) => {
   const renderFriend = ({ item }) => (
     <TouchableOpacity 
       style={styles.friendContainer}
-      onPress={() => console.log(`${item.firstName} ${item.lastName} clicked`)}
+      onPress={() => navigation.navigate('Chat', { friend: item })}
       activeOpacity={0.6}
     >
       <Image source={{ uri: item.imageUri }} style={styles.friendImage} />
