@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,8 +9,8 @@ import SplashScreen from './components/splashScreen';
 import MainScreen from './components/mainScreen';
 import StartBuzzScreen from './components/startBuzzScreen';
 import FriendListScreen from './components/friendListScreen';
-import useFonts from './hooks/useFonts';
 import store from './redux/store/store';
+import useFonts from './hooks/useFonts';
 
 const RootStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,24 +30,40 @@ const MainTabNavigator = () => (
 
         return <Ionicons name={iconName} size={size} color={color} />;
       },
+      tabBarActiveTintColor: 'tomato',
+      tabBarInactiveTintColor: 'gray',
       tabBarBadge: route.name === 'FriendList' ? '1' : undefined,
+      tabBarStyle: [
+        {
+          display: 'flex',
+        },
+        null,
+      ],
     })}
-    tabBarOptions={{
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
-    }}
   >
-    <Tab.Screen name="Main" component={MainScreen} options={{ title: 'Profile' }} />
-    <Tab.Screen name="StartABuzz" component={StartBuzzScreen} options={{ title: 'Start a Buzz' }} />
-    <Tab.Screen name="FriendList" component={FriendListScreen} options={{ title: 'Friends' }} />
+    <Tab.Screen
+      name="Main"
+      component={MainScreen}
+      options={{ title: 'Profile' }}
+    />
+    <Tab.Screen
+      name="StartABuzz"
+      component={StartBuzzScreen}
+      options={{ title: 'Start a Buzz' }}
+    />
+    <Tab.Screen
+      name="FriendList"
+      component={FriendListScreen}
+      options={{ title: 'Friends' }}
+    />
   </Tab.Navigator>
 );
 
 const App = () => {
-  fontsLoaded = useFonts()
+  fontsLoaded = useFonts();
 
   if (!fontsLoaded) {
-    return null
+    return null;
   }
 
   return (
