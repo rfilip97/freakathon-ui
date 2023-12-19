@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 const friends = [
   {
@@ -27,16 +27,20 @@ const friends = [
 
 const FriendListScreen = () => {
   const renderFriend = ({ item }) => (
-    <View style={styles.friendContainer}>
+    <TouchableOpacity 
+      style={styles.friendContainer}
+      onPress={() => console.log(`${item.firstName} ${item.lastName} clicked`)}
+      activeOpacity={0.6}
+    >
       <Image source={{ uri: item.imageUri }} style={styles.friendImage} />
       <View style={styles.friendInfo}>
-        <Text style={styles.friendName}>{item.lastName} {item.firstName}</Text>
+        <Text style={styles.friendName}>{item.firstName} {item.lastName}</Text>
         <View style={styles.statusContainer}>
           <View style={item.status === 'online' ? styles.statusDotOnline : styles.statusDotOffline} />
           <Text style={styles.friendStatus}>{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -53,6 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
+    backgroundColor: '#f0f0f0',
   },
   friendImage: {
     width: 50,
