@@ -14,8 +14,9 @@ const ChatScreen = ({ route }) => {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [ct, setCt] = useState(0);
 
-  const hardcodedResponses = ['Javascript is my life!', 'Yes, daddy UwU'];
+  const hardcodedResponses = ['Javascript is my life!', 'Thx, daddy UwU'];
 
   const sendMessage = () => {
     if (text) {
@@ -28,9 +29,10 @@ const ChatScreen = ({ route }) => {
 
         setTimeout(() => {
           const randomResponse =
-            hardcodedResponses[
-              Math.floor(Math.random() * hardcodedResponses.length)
-            ];
+            hardcodedResponses[ct % hardcodedResponses.length];
+
+          setCt(ct + 1);
+
           const responseMessage = {
             id: `friend_${Date.now()}`,
             text: randomResponse,
@@ -47,7 +49,9 @@ const ChatScreen = ({ route }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={{ uri: friend.imageUri }} style={styles.friendImage} />
-        <Text style={styles.friendName}>{friend.lastName} {friend.firstName}</Text>
+        <Text style={styles.friendName}>
+          {friend.lastName} {friend.firstName}
+        </Text>
       </View>
       <FlatList
         data={messages}
