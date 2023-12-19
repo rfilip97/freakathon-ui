@@ -1,66 +1,17 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import SplashScreen from './components/splashScreen';
-import MainScreen from './components/mainScreen';
-import StartBuzzScreen from './components/startBuzzScreen';
-import FriendListScreen from './components/friendListScreen';
 import store from './redux/store/store';
 import useFonts from './hooks/useFonts';
+import MainTabNavigator from './components/common/mainTabNavigator';
 
 const RootStack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-const MainTabNavigator = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let iconName;
-        if (route.name === 'Main') {
-          iconName = focused ? 'home' : 'home-outline';
-        } else if (route.name === 'StartABuzz') {
-          iconName = focused ? 'flash' : 'flash-outline';
-        } else if (route.name === 'FriendList') {
-          iconName = focused ? 'people' : 'people-outline';
-        }
-
-        return <Ionicons name={iconName} size={size} color={color} />;
-      },
-      tabBarActiveTintColor: 'tomato',
-      tabBarInactiveTintColor: 'gray',
-      tabBarBadge: route.name === 'FriendList' ? '1' : undefined,
-      tabBarStyle: [
-        {
-          display: 'flex',
-        },
-        null,
-      ],
-    })}
-  >
-    <Tab.Screen
-      name="Main"
-      component={MainScreen}
-      options={{ title: 'Profile' }}
-    />
-    <Tab.Screen
-      name="StartABuzz"
-      component={StartBuzzScreen}
-      options={{ title: 'Start a Buzz' }}
-    />
-    <Tab.Screen
-      name="FriendList"
-      component={FriendListScreen}
-      options={{ title: 'Friends' }}
-    />
-  </Tab.Navigator>
-);
 
 const App = () => {
-  fontsLoaded = useFonts();
+  const fontsLoaded = useFonts();
 
   if (!fontsLoaded) {
     return null;
