@@ -6,6 +6,7 @@ import {
   Button,
   FlatList,
   StyleSheet,
+  Image,
 } from 'react-native';
 
 const ChatScreen = ({ route }) => {
@@ -44,9 +45,14 @@ const ChatScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Image source={{ uri: friend.imageUri }} style={styles.friendImage} />
+        <Text style={styles.friendName}>{friend.lastName} {friend.firstName}</Text>
+      </View>
       <FlatList
         data={messages}
         keyExtractor={(item) => item.id}
+        style={{ paddingTop: '10%' }}
         renderItem={({ item }) => (
           <Text
             style={
@@ -77,8 +83,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    paddingBottom: '10%',
     paddingTop: '20%',
+    paddingBottom: '10%',
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  friendImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+  },
+  friendName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 5,
   },
   inputContainer: {
     flexDirection: 'row',

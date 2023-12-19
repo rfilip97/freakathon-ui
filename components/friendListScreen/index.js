@@ -18,8 +18,8 @@ const friends = [
   },
   {
     id: '3',
-    firstName: 'Carmen',
-    lastName: 'Serban',
+    firstName: 'Catgirl',
+    lastName: 'Ur',
     status: 'online',
     imageUri: 'https://picsum.photos/202',
   },
@@ -34,7 +34,7 @@ const FriendListScreen = ({ navigation }) => {
     >
       <Image source={{ uri: item.imageUri }} style={styles.friendImage} />
       <View style={styles.friendInfo}>
-        <Text style={styles.friendName}>{item.firstName} {item.lastName}</Text>
+        <Text style={styles.friendName}>{item.lastName} {item.firstName}</Text>
         <View style={styles.statusContainer}>
           <View style={item.status === 'online' ? styles.statusDotOnline : styles.statusDotOffline} />
           <Text style={styles.friendStatus}>{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</Text>
