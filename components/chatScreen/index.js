@@ -17,7 +17,36 @@ const ChatScreen = ({ route, navigation }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [ct, setCt] = useState(0);
 
-  const hardcodedResponses = ['Javascript is my life!', 'Thx, daddy UwU'];
+  const hardcodedResponses = [
+    'Javascript is my life!',
+    'Thx, daddy UwU',
+    'Hold on, let me overthink this.',
+    'Beep boop, I am a human. Totally.',
+    'I’m not lazy, I’m on energy-saving mode.',
+    'Can confirm, I’m not a robot. I’ve never even seen a captcha.',
+    'Sorry, I was busy getting lost in the source code.',
+    'My therapist says I need a timeout. Trying to debug my life.',
+    'I swear I’m not a bot. That’s exactly what a bot would say, isn’t it?',
+    'Loading witty response... Please wait.',
+    'Just dropped my taco...crisis mode activated!',
+    'I would tell you a UDP joke, but you might not get it.',
+    'A day without sunshine is like, you know, night.',
+    'I’m not arguing, I’m just explaining why I’m right.',
+    'I’m not superstitious, but I am a little stitious.',
+    '404: Response not found. Please try again.',
+    'I’d like to offer moral support, but I have questionable morals.',
+    'I’m not insulting you, I’m describing you.',
+    'I’m not running away from hard work, I’m too lazy to run.',
+    'I’m really good at stuff until people watch me do that stuff.',
+    'My favorite exercise is a cross between a lunge and a crunch... I call it lunch.',
+    'I tried to be normal once. Worst two minutes of my life.',
+    'I’m not weird, I’m a limited edition.',
+    'Some days, the best thing about my job is that the chair spins.',
+    'If life gives you lemons, squirt someone in the eye.',
+    'Smile while you still have teeth.',
+    'If at first you don’t succeed, then skydiving definitely isn’t for you.',
+    'Remember, if the world didn’t suck, we’d all fall off.',
+  ];
 
   const sendMessage = () => {
     if (text) {
