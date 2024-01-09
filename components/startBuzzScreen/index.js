@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import { friends } from '../friendListScreen';
 
 const StartBuzzScreen = ({ navigation }) => {
@@ -7,11 +14,11 @@ const StartBuzzScreen = ({ navigation }) => {
 
   const startSearch = () => {
     setIsSearching(true);
-    
+
     setTimeout(() => {
       const randomFriend = friends[Math.floor(Math.random() * friends.length)];
       setIsSearching(false);
-      
+
       navigation.navigate('Chat', { friend: randomFriend });
     }, 3000);
   };
@@ -19,9 +26,9 @@ const StartBuzzScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Start a Buzz</Text>
-      
+
       <Button title="Find someone to chat with!" onPress={startSearch} />
-      
+
       {isSearching && (
         <View style={styles.searchContainer}>
           <ActivityIndicator size="large" color="#0000ff" />

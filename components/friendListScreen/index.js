@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
 export const friends = [
   {
@@ -37,17 +44,27 @@ const FriendListScreen = ({ navigation }) => {
   });
 
   const renderFriend = ({ item }) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.friendContainer}
       onPress={() => navigation.navigate('Chat', { friend: item })}
       activeOpacity={0.6}
     >
       <Image source={{ uri: item.imageUri }} style={styles.friendImage} />
       <View style={styles.friendInfo}>
-        <Text style={styles.friendName}>{item.lastName} {item.firstName}</Text>
+        <Text style={styles.friendName}>
+          {item.lastName} {item.firstName}
+        </Text>
         <View style={styles.statusContainer}>
-          <View style={item.status === 'online' ? styles.statusDotOnline : styles.statusDotOffline} />
-          <Text style={styles.friendStatus}>{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</Text>
+          <View
+            style={
+              item.status === 'online'
+                ? styles.statusDotOnline
+                : styles.statusDotOffline
+            }
+          />
+          <Text style={styles.friendStatus}>
+            {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -57,7 +74,7 @@ const FriendListScreen = ({ navigation }) => {
     <FlatList
       data={sortedFriends}
       renderItem={renderFriend}
-      keyExtractor={item => item.id}
+      keyExtractor={(item) => item.id}
     />
   );
 };
