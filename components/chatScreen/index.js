@@ -15,7 +15,6 @@ const ChatScreen = ({ route, navigation }) => {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [ct, setCt] = useState(0);
 
   const hardcodedResponses = [
     'Javascript is my life!',
@@ -58,10 +57,10 @@ const ChatScreen = ({ route, navigation }) => {
         setIsTyping(true);
 
         setTimeout(() => {
-          const randomResponse =
-            hardcodedResponses[ct % hardcodedResponses.length];
-
-          setCt(ct + 1);
+          const randomIndex = Math.floor(
+            Math.random() * hardcodedResponses.length
+          );
+          const randomResponse = hardcodedResponses[randomIndex];
 
           const responseMessage = {
             id: `friend_${Date.now()}`,
