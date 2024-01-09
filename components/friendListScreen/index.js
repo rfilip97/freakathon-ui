@@ -26,6 +26,16 @@ const friends = [
 ];
 
 const FriendListScreen = ({ navigation }) => {
+  const sortedFriends = [...friends].sort((a, b) => {
+    if (a.status === 'online' && b.status === 'offline') {
+      return -1;
+    }
+    if (a.status === 'offline' && b.status === 'online') {
+      return 1;
+    }
+    return 0;
+  });
+
   const renderFriend = ({ item }) => (
     <TouchableOpacity 
       style={styles.friendContainer}
@@ -45,7 +55,7 @@ const FriendListScreen = ({ navigation }) => {
 
   return (
     <FlatList
-      data={friends}
+      data={sortedFriends}
       renderItem={renderFriend}
       keyExtractor={item => item.id}
     />
