@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-const friends = [
+export const friends = [
   {
     id: '1',
     firstName: 'Daniel',

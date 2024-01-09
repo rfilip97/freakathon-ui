@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginBottom: 5,
     paddingTop: '10%',
-    paddingLeft: '5%'
+    paddingLeft: '5%',
   },
   backButtonText: {
     fontSize: 16,
