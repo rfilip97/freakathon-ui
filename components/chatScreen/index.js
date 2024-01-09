@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,9 +7,10 @@ import {
   FlatList,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
-const ChatScreen = ({ route }) => {
+const ChatScreen = ({ route, navigation }) => {
   const { friend } = route.params;
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
@@ -45,18 +46,28 @@ const ChatScreen = ({ route }) => {
     }
   };
 
+  const goBackToMainTabs = () => {
+    navigation.navigate('MainTabs');
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={{ uri: friend.imageUri }} style={styles.friendImage} />
-        <Text style={styles.friendName}>
-          {friend.lastName} {friend.firstName}
-        </Text>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={goBackToMainTabs} style={styles.backButton}>
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+        <View style={styles.header}>
+          <Image source={{ uri: friend.imageUri }} style={styles.friendImage} />
+          <Text style={styles.friendName}>
+            {friend.lastName} {friend.firstName}
+          </Text>
+        </View>
       </View>
+
       <FlatList
         data={messages}
         keyExtractor={(item) => item.id}
-        style={{ paddingTop: '10%' }}
+        style={styles.list}
         renderItem={({ item }) => (
           <Text
             style={
@@ -87,12 +98,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    paddingTop: '20%',
+    paddingTop: '10%',
     paddingBottom: '10%',
+  },
+  headerContainer: {
+    marginBottom: 20,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 20,
+    justifyContent: 'center',
+  },
+  backButton: {
+    alignSelf: 'flex-start',
+    marginBottom: 5,
+    paddingTop: '10%',
+    paddingLeft: '5%'
+  },
+  backButtonText: {
+    fontSize: 16,
+    color: '#007AFF',
   },
   friendImage: {
     width: 80,
@@ -103,6 +127,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 5,
+  },
+  list: {
+    paddingTop: '10%',
   },
   inputContainer: {
     flexDirection: 'row',
