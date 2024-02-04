@@ -18,9 +18,7 @@ const ProfileScreen = ({ route }) => {
       <Text>App Age: {userDetails.appAge}</Text>
       <View>
         {userDetails.interests.map((interest, index) => (
-          <Text key={index}>
-            {interest}
-          </Text>
+          <Text key={index}>{interest}</Text>
         ))}
       </View>
     </View>

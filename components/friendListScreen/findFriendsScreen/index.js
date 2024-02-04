@@ -9,10 +9,12 @@ const FindFriendsScreen = ({ navigation }) => {
   const [hobbyQuery, setHobbyQuery] = useState('');
 
   // TODO: fetch instead of mock
-  const friends = mockedFriendsData
+  const friends = mockedFriendsData;
 
   const filteredFriends = friends.filter((friend) => {
-    const nameMatch = friend.name.toLowerCase().includes(nameQuery.toLowerCase());
+    const nameMatch = friend.name
+      .toLowerCase()
+      .includes(nameQuery.toLowerCase());
     const tagMatch = friend.tag.toLowerCase().includes(nameQuery.toLowerCase());
     const hobbyMatch = hobbyQuery
       ? friend.interests.some((interest) =>
@@ -62,7 +64,7 @@ const FindFriendsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: '10%'
+    marginBottom: '10%',
   },
   row: {
     flex: 1,

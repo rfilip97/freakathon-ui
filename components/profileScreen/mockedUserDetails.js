@@ -1,5 +1,5 @@
 export default mockUserDetails = {
-  '1': {
+  1: {
     fullName: 'Josh Holloway',
     tagName: '@josh_h',
     buddies: 0,
@@ -8,7 +8,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=1',
   },
-  '2': {
+  2: {
     fullName: 'Emily Clark',
     tagName: '@emclark',
     buddies: 0,
@@ -17,7 +17,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=2',
   },
-  '3': {
+  3: {
     fullName: 'Leo Gardner',
     tagName: '@leog',
     buddies: 0,
@@ -26,7 +26,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=3',
   },
-  '4': {
+  4: {
     fullName: 'Sophia Turner',
     tagName: '@sophie_t',
     buddies: 0,
@@ -35,7 +35,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=4',
   },
-  '5': {
+  5: {
     fullName: 'Michael Santos',
     tagName: '@mikes',
     buddies: 0,
@@ -44,7 +44,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=5',
   },
-  '6': {
+  6: {
     fullName: 'Isabella Pearson',
     tagName: '@izzy_p',
     buddies: 0,
@@ -53,7 +53,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=6',
   },
-  '7': {
+  7: {
     fullName: 'Ethan Hunt',
     tagName: '@ethan_h',
     buddies: 0,
@@ -62,7 +62,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=7',
   },
-  '8': {
+  8: {
     fullName: 'Daniel Mocanu',
     tagName: '@danmocanu',
     buddies: 15,
@@ -71,7 +71,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=8',
   },
-  '9': {
+  9: {
     fullName: 'Michael Jackson',
     tagName: '@mikejack',
     buddies: 50,
@@ -80,7 +80,7 @@ export default mockUserDetails = {
     backgroundImageUri: 'https://picsum.photos/seed/picsum/600/300',
     avatarUri: 'https://picsum.photos/200?random=9',
   },
-  '10': {
+  10: {
     fullName: 'Ur Catgirl',
     tagName: '@uwu',
     buddies: 50,
