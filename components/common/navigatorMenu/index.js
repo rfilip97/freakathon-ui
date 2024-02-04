@@ -7,7 +7,7 @@ import StartBuzzScreen from '../../startBuzzScreen';
 
 const Tab = createBottomTabNavigator();
 
-const MainTabNavigator = () => (
+const NavigatorMenu = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
@@ -36,19 +36,19 @@ const MainTabNavigator = () => (
     <Tab.Screen
       name="Main"
       component={MainScreen}
-      options={{ title: 'Profile' }}
+      options={{ title: 'Profile', headerShown: false }}
     />
     <Tab.Screen
       name="StartABuzz"
       component={StartBuzzScreen}
-      options={{ title: 'Start a Buzz' }}
+      options={{ title: 'Start a Buzz', headerShown: false }}
     />
     <Tab.Screen
       name="FriendList"
       component={FriendListScreen}
-      options={{ title: 'Friends' }}
+      options={{ title: 'Friends', headerShown: false }}
     />
   </Tab.Navigator>
 );
 
-export default MainTabNavigator;
+export default NavigatorMenu;

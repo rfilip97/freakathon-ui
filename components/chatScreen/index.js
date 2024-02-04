@@ -7,10 +7,9 @@ import {
   FlatList,
   StyleSheet,
   Image,
-  TouchableOpacity,
 } from 'react-native';
 
-const ChatScreen = ({ route, navigation }) => {
+const ChatScreen = ({ route }) => {
   const { friend } = route.params;
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
@@ -60,16 +59,9 @@ const ChatScreen = ({ route, navigation }) => {
     }
   };
 
-  const goBackToMainTabs = () => {
-    navigation.navigate('MainTabs');
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={goBackToMainTabs} style={styles.backButton}>
-          <Text style={styles.backButtonText}>Back</Text>
-        </TouchableOpacity>
         <View style={styles.header}>
           <Image source={{ uri: friend.imageUri }} style={styles.friendImage} />
           <Text style={styles.friendName}>
@@ -121,16 +113,6 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backButton: {
-    alignSelf: 'flex-start',
-    marginBottom: 5,
-    paddingTop: '10%',
-    paddingLeft: '5%',
-  },
-  backButtonText: {
-    fontSize: 16,
-    color: '#007AFF',
   },
   friendImage: {
     width: 80,
