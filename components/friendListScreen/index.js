@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import { FAB } from 'react-native-paper';
 
 export const friends = [
   {
@@ -71,11 +72,20 @@ const FriendListScreen = ({ navigation }) => {
   );
 
   return (
-    <FlatList
-      data={sortedFriends}
-      renderItem={renderFriend}
-      keyExtractor={(item) => item.id}
-    />
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={sortedFriends}
+        renderItem={renderFriend}
+        keyExtractor={(item) => item.id}
+      />
+
+      <FAB
+        style={styles.fab}
+        small
+        icon="plus"
+        onPress={() => navigation.navigate('FindFriends')} // Make sure you have a FindFriends route defined in your navigator
+      />
+    </View>
   );
 };
 
@@ -119,6 +129,13 @@ const styles = StyleSheet.create({
   },
   friendStatus: {
     fontSize: 16,
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'white',
   },
 });
 

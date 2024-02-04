@@ -9,6 +9,7 @@ import MainTabNavigator from './components/common/navigatorMenu';
 import SplashScreen from './components/splashScreen';
 import useFonts from './hooks/useFonts';
 import store from './redux/store/store';
+import FindFriendsScreen from './components/friendListScreen/findFriendsScreen';
 
 const RootStack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const App = () => {
   return (
     <ReduxProvider store={store}>
       <PaperProvider>
+        {/* TODO: move the navigator in a separate component */}
         <NavigationContainer>
           <RootStack.Navigator
             screenOptions={{
@@ -30,9 +32,18 @@ const App = () => {
               },
             }}
           >
-            <RootStack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+            <RootStack.Screen
+              name="Splash"
+              component={SplashScreen}
+              options={{ headerShown: false }}
+            />
             <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
             <RootStack.Screen name="Chat" component={ChatScreen} />
+            <RootStack.Screen
+              name="FindFriends"
+              component={FindFriendsScreen}
+              options={{ headerShown: false }}
+            />
           </RootStack.Navigator>
         </NavigationContainer>
       </PaperProvider>

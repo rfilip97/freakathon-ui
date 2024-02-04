@@ -1,0 +1,51 @@
+export default mockFriendsData = [
+  {
+    id: '1',
+    name: 'Josh Holloway',
+    tag: '@josh_h',
+    interests: ['Hiking', 'Photography', 'Reading'],
+    imageUri: 'https://picsum.photos/200?random=1',
+  },
+  {
+    id: '2',
+    name: 'Emily Clark',
+    tag: '@emclark',
+    interests: ['Music', 'Yoga', 'Blogging'],
+    imageUri: 'https://picsum.photos/200?random=2',
+  },
+  {
+    id: '3',
+    name: 'Leo Gardner',
+    tag: '@leog',
+    interests: ['Gaming', 'Travel', 'Cooking'],
+    imageUri: 'https://picsum.photos/200?random=3',
+  },
+  {
+    id: '4',
+    name: 'Sophia Turner',
+    tag: '@sophie_t',
+    interests: ['Fashion', 'Art', 'Reading', 'Music', 'Yoga', 'Blogging'],
+    imageUri: 'https://picsum.photos/200?random=4',
+  },
+  {
+    id: '5',
+    name: 'Michael Santos',
+    tag: '@mikes',
+    interests: ['Fitness', 'Technology', 'Photography'],
+    imageUri: 'https://picsum.photos/200?random=5',
+  },
+  {
+    id: '6',
+    name: 'Isabella Pearson',
+    tag: '@izzy_p',
+    interests: ['Dance', 'Cooking', 'Travel'],
+    imageUri: 'https://picsum.photos/200?random=6',
+  },
+  {
+    id: '7',
+    name: 'Ethan Hunt',
+    tag: '@ethan_h',
+    interests: ['Skydiving', 'Scuba Diving', 'Rock Climbing'],
+    imageUri: 'https://picsum.photos/200?random=7',
+  },
+];
