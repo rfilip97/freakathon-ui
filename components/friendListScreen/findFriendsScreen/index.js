@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, FlatList, TextInput } from 'react-native';
-import { Appbar, Card, Title, Paragraph, Button } from 'react-native-paper';
+import { Appbar } from 'react-native-paper';
 import FriendCard from './friendCard';
 import mockedFriendsData from './mockedFriends';
 
@@ -21,6 +21,13 @@ const FindFriendsScreen = ({ navigation }) => {
       : true;
     return (nameMatch || tagMatch) && hobbyMatch;
   });
+
+  const renderFriend = ({ item }) => (
+    <FriendCard
+      friend={item}
+      onPress={() => navigation.navigate('Profile', { userId: item.id })}
+    />
+  );
 
   return (
     <View style={styles.container}>
@@ -45,7 +52,7 @@ const FindFriendsScreen = ({ navigation }) => {
         data={filteredFriends}
         keyExtractor={(item) => item.id}
         numColumns={2}
-        renderItem={({ item }) => <FriendCard friend={item} />}
+        renderItem={renderFriend}
         columnWrapperStyle={styles.columnWrapper}
       />
     </View>

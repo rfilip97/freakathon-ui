@@ -10,6 +10,7 @@ import SplashScreen from './components/splashScreen';
 import useFonts from './hooks/useFonts';
 import store from './redux/store/store';
 import FindFriendsScreen from './components/friendListScreen/findFriendsScreen';
+import ProfileScreen from './components/profileScreen';
 
 const RootStack = createNativeStackNavigator();
 
@@ -44,6 +45,7 @@ const App = () => {
               component={FindFriendsScreen}
               options={{ headerShown: false }}
             />
+            <RootStack.Screen name="Profile" component={ProfileScreen} />
           </RootStack.Navigator>
         </NavigationContainer>
       </PaperProvider>
