@@ -1,8 +1,12 @@
 import React from 'react';
 import { Appbar, Avatar } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
 const CustomHeader = ({ navigation, back }) => {
+  const handleProfileIconPress = () => {
+    console.log('Profile icon pressed');
+  };
+
   return (
     <Appbar.Header style={styles.header}>
       {back ? (
@@ -10,12 +14,17 @@ const CustomHeader = ({ navigation, back }) => {
       ) : null}
       <Appbar.Content title="MEETY" titleStyle={styles.logo} />
       <View style={styles.profileIconContainer}>
-        <Avatar.Icon
-          icon="account"
-          color={'white'}
-          size={40}
-          style={styles.profileIcon}
-        />
+        <TouchableOpacity
+          onPress={handleProfileIconPress}
+          style={styles.profileIconContainer}
+        >
+          <Avatar.Icon
+            icon="account"
+            color={'white'}
+            size={40}
+            style={styles.profileIcon}
+          />
+        </TouchableOpacity>
       </View>
     </Appbar.Header>
   );
