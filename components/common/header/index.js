@@ -7,7 +7,7 @@ const CustomHeader = ({ navigation, back }) => {
     <Appbar.Header>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content title="Buzz Buddy" titleStyle={styles.title} />
-      <Appbar.Action icon="menu" onPress={() => {}} />
+      <Appbar.Action icon="account" onPress={() => {}} />
     </Appbar.Header>
   );
 };
