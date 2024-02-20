@@ -23,21 +23,18 @@ const NavigatorMenu = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
-        tabBarBadge: route.name === 'FriendList' ? '1' : undefined,
-        tabBarStyle: [
-          {
-            display: 'flex',
-          },
-          null,
-        ],
+        tabBarActiveTintColor: '#FBF4F4',
+        tabBarInactiveTintColor: '#FBF4F4',
+        tabBarStyle: {
+          backgroundColor: '#8C1111',
+          paddingTop: 10
+        },
       })}
     >
       <Tab.Screen
         name="Main"
         component={MainScreen}
-        options={{ title: 'Profile', headerShown: false }}
+        options={{ title: 'Home', headerShown: false }}
       />
       <Tab.Screen
         name="StartABuzz"

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   logo: {
     fontFamily: 'Sarina',
     fontSize: 24,
-    color: '',
+    color: '#FBF4F4',
   },
   header: {
     backgroundColor: '#8C1111',
