@@ -14,9 +14,12 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // TODO: Implement the login logic
-    console.log('Login button pressed');
-    navigation.navigate('MainTabs');
+    console.log('Login pressed');
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainTabs' }],
+    });
   };
 
   const handleForgotPassword = () => {
