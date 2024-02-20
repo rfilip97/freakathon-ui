@@ -7,12 +7,19 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const handleSignUpPress = () => {
   console.log('Sign Up pressed');
 };
 
 const LandingPage = () => {
+  const navigation = useNavigation();
+
+  const handleLoginPress = () => {
+    navigation.navigate('Login');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upperHalf}>
@@ -29,7 +36,7 @@ const LandingPage = () => {
           simplify the way we plan and enjoy gatherings.
         </Text>
         <Text style={styles.tagline}>Connect, Plan, and Meet 😃</Text>
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity style={styles.loginButton} onPress={handleLoginPress}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
         <Text style={styles.signUpText} onPress={handleSignUpPress}>
