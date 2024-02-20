@@ -11,7 +11,6 @@ import useFonts from './hooks/useFonts';
 import store from './redux/store/store';
 import FindFriendsScreen from './components/friendListScreen/findFriendsScreen';
 import ProfileScreen from './components/profileScreen';
-import LandingPage from './components/landingScreen';
 import AuthNavigator from './components/common/AuthNavigator';
 
 const RootStack = createNativeStackNavigator();
@@ -43,11 +42,6 @@ const App = () => {
             <RootStack.Screen
               name="Auth"
               component={AuthNavigator}
-              options={{ headerShown: false }}
-            />
-            <RootStack.Screen
-              name="LandingPage"
-              component={LandingPage}
               options={{ headerShown: false }}
             />
             <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
