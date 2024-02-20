@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const MainScreen = () => {
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handlePress = () => {
+    setIsSearching(true);
+  };
+
   return (
     <View style={styles.container}>
+      {isSearching && (
+        <View style={styles.banner}>
+          <Ionicons name="search" size={20} color="white" />
+          <Text style={styles.bannerText}>We are looking for a chat...</Text>
+        </View>
+      )}
       <Image source={require('../../assets/peepos.png')} style={styles.image} />
       <Text style={styles.description}>
         Engage in intriguing, anonymous chats with like-minded individuals
@@ -14,7 +27,11 @@ const MainScreen = () => {
         single tap initiates a tailored matchmaking process, aligning interests
         and preferences for a meaningful exchange.
       </Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={[styles.button, isSearching ? styles.buttonInactive : styles.buttonActive]}
+        onPress={handlePress}
+        disabled={isSearching}
+      >
         <Icon name="incognito" size={20} color="white" />
         <Text style={styles.buttonText}>Request an anonymous chat</Text>
       </TouchableOpacity>
@@ -40,10 +57,23 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginBottom: 20,
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+  },
+  banner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#8C1111',
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    width: '100%',
+    marginBottom: 20,
+    borderRadius: 10
+  },
+  bannerText: {
+    color: 'white',
+    marginLeft: 10,
   },
   button: {
-    backgroundColor: '#8C1111',
     paddingTop: 10,
     paddingBottom: 10,
     marginBottom: 10,
@@ -52,6 +82,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width: '80%',
+  },
+  buttonActive: {
+    backgroundColor: '#8C1111',
+  },
+  buttonInactive: {
+    backgroundColor: 'gray',
   },
   buttonText: {
     color: 'white',
