@@ -10,11 +10,18 @@ import {
 } from 'react-native';
 import { Avatar } from 'react-native-paper';
 
-const EventCard = ({ title, description, location, participants, date }) => {
+const EventCard = ({
+  title,
+  description,
+  emoji,
+  location,
+  participants,
+  date,
+}) => {
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
-        <Text style={styles.headerEmoji}>🎮</Text>
+        <Text style={styles.headerEmoji}>{emoji}</Text>
         <Text style={styles.headerText}>{title}</Text>
       </View>
       <View style={styles.cardContent}>
@@ -115,6 +122,7 @@ const ProfileScreen = () => {
   const events = [
     {
       title: 'Dungeons & Dragons Night',
+      emoji: '🎮',
       description:
         'Greetings, Brave Adventurer! You are cordially invited to a night of mystery, magic, and endless adventure.',
       location: 'Razvan Residence Nr.14',
@@ -123,6 +131,7 @@ const ProfileScreen = () => {
     },
     {
       title: 'Chess Night',
+      emoji: '♟️',
       description:
         'Greetings, Brave Adventurer! You are cordially invited to a night of mystery, magic, and endless adventure.',
       location: 'Hilton Hotel Nr.14',
@@ -146,6 +155,7 @@ const ProfileScreen = () => {
           <EventCard
             key={index}
             title={event.title}
+            emoji={event.emoji}
             description={event.description}
             location={event.location}
             date={event.date}
@@ -378,7 +388,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    margin: 4
+    margin: 4,
   },
   addButtonText: {
     color: '#FFFFFF',
@@ -439,7 +449,7 @@ const styles = StyleSheet.create({
     padding: 8,
     elevation: 2,
     marginTop: 10,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   submitButtonText: {
     color: 'white',
