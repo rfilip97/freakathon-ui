@@ -45,11 +45,11 @@ const EventCard = ({
   );
 };
 
-const Tag = ({ text, onRemove }) => (
-  <View style={styles.tag}>
-    <Text style={styles.tagText}>{text}</Text>
+const Chip = ({ text, onRemove }) => (
+  <View style={styles.chip}>
+    <Text style={styles.chipText}>{text}</Text>
     <TouchableOpacity onPress={onRemove}>
-      <Text style={styles.tagRemoveButton}>×</Text>
+      <Text style={styles.chipRemoveButton}>×</Text>
     </TouchableOpacity>
   </View>
 );
@@ -72,7 +72,7 @@ const Interests = ({ interests, setInterests }) => {
   return (
     <View style={styles.interestsContainer}>
       {interests.map((interest, index) => (
-        <Tag
+        <Chip
           key={index}
           text={interest}
           onRemove={() => removeInterest(interest)}
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
   emoji: {
     fontSize: 16,
   },
-  tag: {
+  chip: {
     backgroundColor: '#8C1111',
     borderRadius: 20,
     paddingHorizontal: 9,
@@ -348,12 +348,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 5,
   },
-  tagText: {
+  chipText: {
     color: 'white',
     fontSize: 14,
     marginRight: 4,
   },
-  tagRemoveButton: {
+  chipRemoveButton: {
     marginLeft: 5,
     color: 'white',
     fontWeight: 'bold',
