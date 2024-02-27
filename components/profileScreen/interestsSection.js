@@ -33,13 +33,13 @@ const InterestsSection = ({ interests, setInterests }) => {
           onRemove={() => removeInterest(interest)}
         />
       ))}
-
       <TouchableOpacity
         onPress={() => setModalVisible(true)}
         style={styles.addButton}
       >
         <Text style={styles.addButtonText}>Add +</Text>
       </TouchableOpacity>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   submitButton: {
-    backgroundColor: 'grey',
+    backgroundColor: '#8C1111',
     borderRadius: 20,
     padding: 8,
     elevation: 2,
