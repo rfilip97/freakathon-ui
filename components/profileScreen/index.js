@@ -5,8 +5,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  TextInput,
-  Modal,
 } from 'react-native';
 import mockedEvents from './mockedEvents';
 import { Avatar } from 'react-native-paper';
@@ -28,7 +26,7 @@ const ProfileScreen = () => {
       </View>
       <InterestsSection interests={interests} setInterests={setInterests} />
 
-      <EventSection events={mockedEvents}/>
+      <EventSection events={mockedEvents} />
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Create new Events</Text>
       </TouchableOpacity>
@@ -57,23 +55,6 @@ const styles = StyleSheet.create({
     color: 'grey',
     marginBottom: '4%',
   },
-  interestsSection: {
-    marginTop: 20,
-    paddingHorizontal: 10,
-  },
-  location: {
-    fontSize: 16,
-    fontStyle: 'italic',
-    marginBottom: 4,
-  },
-  participants: {
-    fontSize: 16,
-    marginBottom: 4,
-  },
-  date: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   button: {
     backgroundColor: '#8C1111',
     padding: 15,
@@ -85,60 +66,6 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: 'bold',
-  },
-  redLine: {
-    height: 4,
-    backgroundColor: '#8C1111',
-  },
-  circle: {
-    height: 12,
-    width: 12,
-    borderRadius: 6,
-    backgroundColor: '#8C1111',
-    marginRight: 8,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  submitButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  inputField: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    width: 200,
-    textAlign: 'center',
-  },
-  submitButton: {
-    backgroundColor: 'grey',
-    borderRadius: 20,
-    padding: 8,
-    elevation: 2,
-    marginTop: 10,
-    paddingHorizontal: 20,
-  },
-  submitButtonText: {
-    color: 'white',
-    textAlign: 'center',
   },
 });
 
