@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import mockedEvents from './mockedEvents';
 import { Avatar } from 'react-native-paper';
-import EventCard from './eventCard';
 import EventSection from './eventSection';
 import InterestsSection from './interestsSection';
+import ProfileSection from './profileSection';
 
 const ProfileScreen = () => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
@@ -19,14 +19,10 @@ const ProfileScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.profileSection}>
-        <Avatar.Icon size={100} icon="account" style={styles.avatar} />
-        <Text style={styles.name}>{username}</Text>
-        <Text style={styles.tag}>{userTag}</Text>
-      </View>
+      <ProfileSection username={username} userTag={userTag} />
       <InterestsSection interests={interests} setInterests={setInterests} />
-
       <EventSection events={mockedEvents} />
+
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Create new Events</Text>
       </TouchableOpacity>
@@ -37,23 +33,6 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  profileSection: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  avatar: {
-    backgroundColor: '#8C1111',
-  },
-  name: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: '3%',
-  },
-  tag: {
-    fontSize: 16,
-    color: 'grey',
-    marginBottom: '4%',
   },
   button: {
     backgroundColor: '#8C1111',
