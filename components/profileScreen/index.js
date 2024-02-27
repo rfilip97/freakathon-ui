@@ -8,6 +8,7 @@ import {
   TextInput,
   Modal,
 } from 'react-native';
+import mockedEvents from './mockedEvents'
 import { Avatar } from 'react-native-paper';
 
 const EventCard = ({
@@ -116,29 +117,8 @@ const Interests = ({ interests, setInterests }) => {
 
 const ProfileScreen = () => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
-
   const username = 'Popa Ionica';
   const userHandle = '@maimutadepresiva21';
-  const events = [
-    {
-      title: 'Dungeons & Dragons Night',
-      emoji: '🎮',
-      description:
-        'Greetings, Brave Adventurer! You are cordially invited to a night of mystery, magic, and endless adventure.',
-      location: 'Razvan Residence Nr.14',
-      date: '23 Feb 2024 17:00',
-      participants: '3/6 joined',
-    },
-    {
-      title: 'Chess Night',
-      emoji: '♟️',
-      description:
-        'Greetings, Brave Adventurer! You are cordially invited to a night of mystery, magic, and endless adventure.',
-      location: 'Hilton Hotel Nr.14',
-      date: '23 Feb 2024 17:00',
-      participants: '1/6 joined',
-    },
-  ];
 
   return (
     <ScrollView style={styles.container}>
