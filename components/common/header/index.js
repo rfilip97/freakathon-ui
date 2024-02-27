@@ -4,7 +4,7 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
 const CustomHeader = ({ navigation, back }) => {
   const handleProfileIconPress = () => {
-    console.log('Profile icon pressed');
+    navigation.navigate('Profile');
   };
 
   return (
