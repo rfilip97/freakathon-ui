@@ -118,14 +118,14 @@ const Interests = ({ interests, setInterests }) => {
 const ProfileScreen = () => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
   const username = 'Popa Ionica';
-  const userHandle = '@maimutadepresiva21';
+  const userTag = '@maimutadepresiva21';
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.profileSection}>
         <Avatar.Icon size={100} icon="account" style={styles.avatar} />
         <Text style={styles.name}>{username}</Text>
-        <Text style={styles.handle}>{userHandle}</Text>
+        <Text style={styles.tag}>{userTag}</Text>
       </View>
       <Interests interests={interests} setInterests={setInterests} />
 
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: '3%',
   },
-  handle: {
+  tag: {
     fontSize: 16,
     color: 'grey',
     marginBottom: '4%',
