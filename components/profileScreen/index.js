@@ -8,9 +8,10 @@ import {
   TextInput,
   Modal,
 } from 'react-native';
-import mockedEvents from './mockedEvents'
+import mockedEvents from './mockedEvents';
 import { Avatar } from 'react-native-paper';
-import EventCard from './eventCard'
+import EventCard from './eventCard';
+import EventSection from './eventSection';
 
 const Chip = ({ text, onRemove }) => (
   <View style={styles.chip}>
@@ -96,20 +97,7 @@ const ProfileScreen = () => {
       </View>
       <Interests interests={interests} setInterests={setInterests} />
 
-      <View style={styles.eventsSection}>
-        <Text style={styles.sectionTitle}>Your Events:</Text>
-        {events.map((event, index) => (
-          <EventCard
-            key={index}
-            title={event.title}
-            emoji={event.emoji}
-            description={event.description}
-            location={event.location}
-            date={event.date}
-            participants={event.participants}
-          />
-        ))}
-      </View>
+      <EventSection events={mockedEvents}/>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Create new Events</Text>
       </TouchableOpacity>
@@ -150,14 +138,6 @@ const styles = StyleSheet.create({
   },
   chip: {
     margin: 4,
-  },
-  eventsSection: {
-    marginTop: 20,
-    paddingHorizontal: 10,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
   },
   location: {
     fontSize: 16,
