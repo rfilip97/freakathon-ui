@@ -1,13 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Avatar, useTheme } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ProfileSection = ({username, userTag}) => {
+const ProfileSection = ({ username, userTag, navigation }) => {
+  const { colors } = useTheme();
+
+  const handlePress = () => {
+    navigation.navigate('QRCodeScreen', { username, userTag });
+  };
+
   return (
     <View style={styles.profileSection}>
       <Avatar.Icon size={100} icon="account" style={styles.avatar} />
       <Text style={styles.name}>{username}</Text>
-      <Text style={styles.tag}>{userTag}</Text>
+      <View style={styles.tagContainer}>
+        <Text style={[styles.tag, { color: colors.primary }]}>{userTag}</Text>
+        <TouchableOpacity onPress={handlePress}>
+          <Icon name="qrcode-scan" size={24} color={colors.primary} style={styles.qrIcon} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -27,8 +39,15 @@ const styles = StyleSheet.create({
   },
   tag: {
     fontSize: 16,
-    color: 'grey',
+    marginRight: 8,
+  },
+  tagContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: '4%',
+  },
+  qrIcon: {
+    marginLeft: 5, // Adjust spacing between text and icon as needed
   },
 });
 

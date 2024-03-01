@@ -12,6 +12,7 @@ import store from './redux/store/store';
 import FindFriendsScreen from './components/friendListScreen/findFriendsScreen';
 import ProfileScreen from './components/profileScreen';
 import AuthNavigator from './components/common/AuthNavigator';
+import QRCodeScreen from './components/common/qrCodeScreen';
 
 const RootStack = createNativeStackNavigator();
 
@@ -52,6 +53,7 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <RootStack.Screen name="Profile" component={ProfileScreen} />
+            <RootStack.Screen name="QRCodeScreen" component={QRCodeScreen} />
           </RootStack.Navigator>
         </NavigationContainer>
       </PaperProvider>

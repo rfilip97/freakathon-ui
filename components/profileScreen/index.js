@@ -12,14 +12,14 @@ import EventSection from './eventSection';
 import InterestsSection from './interestsSection';
 import ProfileSection from './profileSection';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
   const username = 'Popa Ionica';
   const userTag = '@maimutadepresiva21';
 
   return (
     <ScrollView style={styles.container}>
-      <ProfileSection username={username} userTag={userTag} />
+      <ProfileSection username={username} userTag={userTag} navigation={navigation} />
       <InterestsSection interests={interests} setInterests={setInterests} />
       <EventSection events={mockedEvents} />
 
