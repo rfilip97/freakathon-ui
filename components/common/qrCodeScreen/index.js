@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+
+const { height } = Dimensions.get('window');
 
 const QRCodeScreen = ({ route }) => {
   const { username, userTag } = route.params;
@@ -21,8 +23,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    justifyContent: 'flex-start',
+    paddingTop: height / 12,
+    paddingHorizontal: 20,
   },
   username: {
     fontSize: 24,

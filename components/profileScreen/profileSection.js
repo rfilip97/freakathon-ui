@@ -15,9 +15,18 @@ const ProfileSection = ({ username, userTag, navigation }) => {
       <Avatar.Icon size={100} icon="account" style={styles.avatar} />
       <Text style={styles.name}>{username}</Text>
       <View style={styles.tagContainer}>
-        <Text style={[styles.tag, { color: colors.primary }]}>{userTag}</Text>
         <TouchableOpacity onPress={handlePress}>
-          <Icon name="qrcode-scan" size={24} color={colors.primary} style={styles.qrIcon} />
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={[styles.tag, { color: colors.primary }]}>
+              {userTag}
+            </Text>
+            <Icon
+              name="qrcode-scan"
+              size={24}
+              color={colors.primary}
+              style={styles.qrIcon}
+            />
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -39,7 +48,6 @@ const styles = StyleSheet.create({
   },
   tag: {
     fontSize: 16,
-    marginRight: 8,
   },
   tagContainer: {
     flexDirection: 'row',
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
     marginBottom: '4%',
   },
   qrIcon: {
-    marginLeft: 5, // Adjust spacing between text and icon as needed
+    marginLeft: 2,
   },
 });
 
