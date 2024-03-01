@@ -6,7 +6,9 @@ const { height } = Dimensions.get('window');
 
 const QRCodeScreen = ({ route }) => {
   const { username, userTag } = route.params;
-  const qrValue = `https://meety.com/profile/${userTag}`;
+
+  // TMP. Update after starting the development server
+  const qrValue = `exp://192.168.10.171:19000/--/profile/${userTag}`;
 
   return (
     <View style={styles.container}>
