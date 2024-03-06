@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import theme from '../../theme';
 
 const Chip = ({ text, onRemove }) => (
   <View style={styles.chip}>
@@ -12,7 +13,7 @@ const Chip = ({ text, onRemove }) => (
 
 const styles = StyleSheet.create({
   chip: {
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
     borderRadius: 20,
     paddingHorizontal: 9,
     margin: 4,
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   },
   chipText: {
     color: 'white',
-    fontSize: 14,
+    fontSize: theme.fonts.medium.fontSize,
     marginRight: 4,
   },
   chipRemoveButton: {
