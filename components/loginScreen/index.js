@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import theme from '../../theme';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -33,14 +34,14 @@ const LoginScreen = ({ navigation }) => {
         style={styles.backButton}
         onPress={() => navigation.goBack()}
       >
-        <Ionicons name="chevron-back" size={30} color="#8C1111" />
+        <Ionicons name="chevron-back" size={30} color={theme.colors.primary} />
       </TouchableOpacity>
       <View style={styles.container}>
         <Text style={styles.title}>Authentication</Text>
         <Ionicons
           name="person-circle-outline"
           size={100}
-          color="#8C1111"
+          color={theme.colors.primary}
           style={styles.icon}
         />
         <TextInput
@@ -72,7 +73,7 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FBF4F4',
+    backgroundColor: theme.colors.secondary,
     paddingLeft: 10,
   },
   backButton: {
@@ -82,13 +83,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FBF4F4',
+    backgroundColor: theme.colors.secondary,
     padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: theme.fonts.large.fontSize,
     fontWeight: 'bold',
-    color: '#8C1111',
+    color: theme.colors.primary,
     marginBottom: 20,
   },
   icon: {
@@ -96,14 +97,14 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: theme.colors.gray,
     borderRadius: 5,
     padding: 15,
     marginBottom: 10,
   },
   loginButton: {
     width: '100%',
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
@@ -111,11 +112,11 @@ const styles = StyleSheet.create({
   },
   loginButtonText: {
     color: 'white',
-    fontSize: 18,
+    fontSize: theme.fonts.big.fontSize,
     fontWeight: 'bold',
   },
   forgotPassword: {
-    color: '#8C1111',
+    color: theme.colors.primary,
     textDecorationLine: 'underline',
   },
 });
