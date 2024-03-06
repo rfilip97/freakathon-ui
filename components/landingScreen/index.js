@@ -8,6 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import theme from '../../theme';
 
 const handleSignUpPress = () => {
   console.log('Sign Up pressed');
@@ -50,7 +51,7 @@ const LandingPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
   },
   upperHalf: {
     flex: 0.65,
@@ -62,11 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  logo: {
-    fontFamily: 'Sarina',
-    fontSize: 24,
-    color: 'white',
-  },
+  logo: theme.fonts.logo,
   image: {
     flex: 1,
     width: '100%',
@@ -76,10 +73,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     textAlign: 'center',
     color: 'white',
-    fontSize: 14,
+    ...theme.fonts.medium,
   },
   tagline: {
-    fontSize: 24,
+    fontSize: theme.fonts.large.fontSize,
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 50,
@@ -113,7 +110,7 @@ const styles = StyleSheet.create({
   signUpText: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: theme.fonts.large.fontSize,
     fontWeight: 'bold',
     fontStyle: 'italic',
   },
