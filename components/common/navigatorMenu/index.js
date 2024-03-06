@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FriendListScreen from '../../friendListScreen';
 import MainScreen from '../../mainScreen';
 import StartBuzzScreen from '../../startBuzzScreen';
+import theme from '../../../theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,10 +24,10 @@ const NavigatorMenu = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#FBF4F4',
-        tabBarInactiveTintColor: '#FBF4F4',
+        tabBarActiveTintColor: theme.colors.secondary,
+        tabBarInactiveTintColor: theme.colors.secondary,
         tabBarStyle: {
-          backgroundColor: '#8C1111',
+          backgroundColor: theme.colors.primary,
           paddingTop: 10
         },
       })}
