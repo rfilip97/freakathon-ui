@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, StatusBar, View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import theme from '../../../theme';
 
 const UserDetailsDisplay = ({ firstName, lastName }) => (
   <View style={styles.container}>
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text: {
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
   },
 });
 
