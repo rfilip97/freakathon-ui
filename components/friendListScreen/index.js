@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { FAB } from 'react-native-paper';
+import theme from '../../theme';
 
 export const friends = [
   {
@@ -72,7 +73,7 @@ const FriendListScreen = ({ navigation }) => {
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <FlatList
         data={sortedFriends}
         renderItem={renderFriend}
@@ -90,11 +91,15 @@ const FriendListScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondary
+  },
   friendContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: theme.colors.secondary
   },
   friendImage: {
     width: 50,
@@ -106,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   friendName: {
-    fontSize: 18,
+    fontSize: theme.fonts.big.fontSize,
     fontWeight: 'bold',
   },
   statusContainer: {
@@ -128,7 +133,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   friendStatus: {
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
   },
   fab: {
     position: 'absolute',
