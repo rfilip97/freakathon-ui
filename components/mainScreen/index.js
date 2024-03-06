@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import theme from '../../theme';
 
 const MainScreen = () => {
   const [isSearching, setIsSearching] = useState(false);
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 16,
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.secondary,
   },
   image: {
     width: '100%',
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   description: {
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
     textAlign: 'left',
     marginBottom: 20,
     paddingLeft: 10,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   banner: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
     paddingVertical: 10,
     paddingHorizontal: 40,
     width: '100%',
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   buttonActive: {
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
   },
   buttonInactive: {
     backgroundColor: 'gray',
