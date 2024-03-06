@@ -1,6 +1,7 @@
 import React from 'react';
 import { Appbar, Avatar } from 'react-native-paper';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import theme from '../../../theme';
 
 const CustomHeader = ({ navigation, back }) => {
   const handleProfileIconPress = () => {
@@ -20,7 +21,7 @@ const CustomHeader = ({ navigation, back }) => {
         >
           <Avatar.Icon
             icon="account"
-            color={'white'}
+            color="white"
             size={40}
             style={styles.profileIcon}
           />
@@ -32,12 +33,10 @@ const CustomHeader = ({ navigation, back }) => {
 
 const styles = StyleSheet.create({
   logo: {
-    fontFamily: 'Sarina',
-    fontSize: 24,
-    color: '#FBF4F4',
+    ...theme.fonts.logo,
   },
   header: {
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
   },
   profileIconContainer: {
     justifyContent: 'center',
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   profileIcon: {
     backgroundColor: 'gray',
     borderWidth: 2,
-    borderColor: '#FBF4F4',
+    borderColor: theme.colors.secondary,
   },
 });
 
