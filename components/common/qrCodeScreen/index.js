@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import theme from '../../../theme';
 
 const { height } = Dimensions.get('window');
 
@@ -30,12 +31,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   username: {
-    fontSize: 24,
+    fontSize: theme.fonts.large.fontSize,
     fontWeight: 'bold',
     marginBottom: 8,
   },
   userTag: {
-    fontSize: 20,
+    fontSize: theme.fonts.big.fontSize,
     color: 'grey',
     marginBottom: 20,
   },
