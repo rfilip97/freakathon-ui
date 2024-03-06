@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import {
-  View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import mockedEvents from './mockedEvents';
-import { Avatar } from 'react-native-paper';
 import EventSection from './eventSection';
 import InterestsSection from './interestsSection';
 import ProfileSection from './profileSection';
+import theme from '../../theme';
 
 const ProfileScreen = ({navigation}) => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
@@ -35,15 +34,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
     padding: 15,
     margin: 20,
     borderRadius: 10,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
+    color: 'white',
+    fontSize: theme.fonts.big.fontSize,
     fontWeight: 'bold',
   },
 });

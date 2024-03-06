@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import theme from '../../theme';
 
 const ProfileSection = ({ username, userTag, navigation }) => {
   const { colors } = useTheme();
@@ -39,15 +40,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   avatar: {
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
   },
   name: {
-    fontSize: 24,
+    fontSize: theme.fonts.large.fontSize,
     fontWeight: 'bold',
     marginTop: '3%',
   },
   tag: {
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
   },
   tagContainer: {
     flexDirection: 'row',

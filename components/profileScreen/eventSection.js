@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import EventCard from './eventCard';
+import theme from '../../theme';
 
 const EventSection = ({ events }) => {
   return (
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: theme.fonts.big.fontSize,
     fontWeight: 'bold',
   },
 });

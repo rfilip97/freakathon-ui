@@ -8,6 +8,7 @@ import {
   Modal,
 } from 'react-native';
 import Chip from './chip';
+import theme from '../../theme';
 
 const InterestsSection = ({ interests, setInterests }) => {
   const removeInterest = (interestToRemove) => {
@@ -84,8 +85,8 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   addButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
+    color: 'white',
+    fontSize: theme.fonts.medium.fontSize,
     paddingVertical: 5,
     paddingHorizontal: 10,
   },

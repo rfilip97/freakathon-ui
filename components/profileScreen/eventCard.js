@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import theme from '../../theme';
 
 const EventCard = ({
   title,
@@ -37,7 +38,7 @@ const EventCard = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'white',
     borderRadius: 6,
     marginVertical: 10,
     overflow: 'hidden',
@@ -52,26 +53,26 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   cardHeader: {
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
   },
   headerEmoji: {
-    fontSize: 24,
+    fontSize: theme.fonts.large.fontSize,
     marginRight: 8,
   },
   headerText: {
-    color: '#FBF4F4',
+    color: theme.colors.secondary,
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: theme.fonts.big.fontSize,
     fontWeight: 'bold',
   },
   cardContent: {
     padding: 10,
   },
   description: {
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
     marginBottom: 4,
   },
   detailsRow: {
@@ -81,25 +82,25 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   detailsLeft: {
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
     fontWeight: 'bold',
   },
   detailsRight: {
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
     fontWeight: 'bold',
     textAlign: 'right',
   },
   emoji: {
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
   },
   cardFooter: {
-    backgroundColor: '#8C1111',
+    backgroundColor: theme.colors.primary,
     padding: 10,
   },
   footerText: {
-    color: '#FFFFFF',
+    color: 'white',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: theme.fonts.regular.fontSize,
   },
 });
 
