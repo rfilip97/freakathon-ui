@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
+import theme from '../../theme';
 
 const ChatScreen = ({ route }) => {
   const { friend } = route.params;
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   friendName: {
-    fontSize: 18,
+    fontSize: theme.fonts.big.fontSize,
     fontWeight: 'bold',
     marginTop: 5,
   },
