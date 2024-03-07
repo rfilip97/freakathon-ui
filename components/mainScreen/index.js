@@ -15,7 +15,7 @@ const MainScreen = () => {
     <View style={styles.container}>
       {isSearching && (
         <View style={styles.banner}>
-          <Ionicons name="search" size={20} color="white" />
+          <Ionicons name="hourglass" size={20} color="white" />
           <Text style={styles.bannerText}>We are looking for a chat...</Text>
         </View>
       )}
