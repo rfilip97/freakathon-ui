@@ -11,6 +11,7 @@ import FindFriendsScreen from './components/friendListScreen/findFriendsScreen';
 import ProfileScreen from './components/profileScreen';
 import AuthNavigator from './components/common/AuthNavigator';
 import QRCodeScreen from './components/common/qrCodeScreen';
+import CreateEventScreen from './components/createEventScreen';
 import {
   NavigationContainer,
   useNavigationContainerRef,
@@ -59,6 +60,10 @@ const App = () => {
             />
             <RootStack.Screen name="Profile" component={ProfileScreen} />
             <RootStack.Screen name="QRCodeScreen" component={QRCodeScreen} />
+            <RootStack.Screen
+              name="CreateEvent"
+              component={CreateEventScreen}
+            />
           </RootStack.Navigator>
         </NavigationContainer>
       </PaperProvider>
