@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Modal,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,15 +11,23 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import theme from '../../theme';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const CreateEventScreen = () => {
   const [eventName, setEventName] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date());
   const [location, setLocation] = useState('');
   const [limit, setLimit] = useState('');
   const [description, setDescription] = useState('');
   const [isPublic, setIsPublic] = useState(true);
   const [errors, setErrors] = useState({});
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowDatePicker(false);
+    setDate(currentDate);
+  };
 
   const validateFields = () => {
     let valid = true;
@@ -26,10 +35,6 @@ const CreateEventScreen = () => {
 
     if (!eventName.trim()) {
       newErrors.eventName = 'Event name is required.';
-      valid = false;
-    }
-    if (!date.trim()) {
-      newErrors.date = 'Date and time are required.';
       valid = false;
     }
     if (!location.trim()) {
@@ -78,15 +83,41 @@ const CreateEventScreen = () => {
         <View style={styles.inputWithErrorContainer}>
           {errors.date && <Text style={styles.errorText}>{errors.date}</Text>}
           <View style={styles.inputContainer}>
-            <Icon name="calendar-range" size={24} color="white" />
-            <TextInput
-              style={styles.input}
-              placeholder="Date, time"
-              placeholderTextColor="gray"
+        <Icon name="calendar-range" size={24} color="#FFF" />
+        <TouchableOpacity
+          onPress={() => setShowDatePicker(true)}
+        >
+          <Text style={styles.input}>
+            {date.toLocaleDateString()}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <Modal
+        visible={showDatePicker}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setShowDatePicker(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.datePickerContainer}>
+            <DateTimePicker
+              testID="dateTimePicker"
               value={date}
-              onChangeText={setDate}
+              mode="date"
+              display={Platform.OS === 'ios' ? 'inline' : 'calendar'}
+              onChange={onDateChange}
+              style={styles.datePicker}
             />
+            <TouchableOpacity
+              style={styles.doneButton}
+              onPress={() => setShowDatePicker(false)}
+            >
+              <Text style={styles.doneButtonText}>Done</Text>
+            </TouchableOpacity>
           </View>
+        </View>
+      </Modal>
         </View>
 
         <View style={styles.inputWithErrorContainer}>
@@ -216,6 +247,36 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: theme.fonts.big.fontSize,
+  },
+  dateText: {
+    color: 'white',
+    fontSize: theme.fonts.regular.fontSize,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  datePickerContainer: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+  },
+  datePicker: {
+    width: '100%',
+    backgroundColor: 'white',
+  },
+  doneButton: {
+    marginTop: 10,
+    backgroundColor: theme.colors.primary,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  doneButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 

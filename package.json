@@ -10,6 +10,7 @@
     "clean": "prettier --write ."
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^7.6.2",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.18",
