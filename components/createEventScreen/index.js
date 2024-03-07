@@ -8,74 +8,122 @@ import {
   TouchableOpacity,
   Switch,
 } from 'react-native';
-import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import theme from '../../theme';
 
 const CreateEventScreen = () => {
-  const { colors } = useTheme();
   const [eventName, setEventName] = useState('');
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [limit, setLimit] = useState('');
   const [description, setDescription] = useState('');
   const [isPublic, setIsPublic] = useState(true);
+  const [errors, setErrors] = useState({});
+
+  const validateFields = () => {
+    let valid = true;
+    let newErrors = {};
+
+    if (!eventName.trim()) {
+      newErrors.eventName = 'Event name is required.';
+      valid = false;
+    }
+    if (!date.trim()) {
+      newErrors.date = 'Date and time are required.';
+      valid = false;
+    }
+    if (!location.trim()) {
+      newErrors.location = 'Location is required.';
+      valid = false;
+    }
+    if (!limit.trim()) {
+      newErrors.limit = 'Limit is required.';
+      valid = false;
+    } else if (!Number.isInteger(Number(limit)) || Number(limit) <= 0) {
+      newErrors.limit = 'Limit must be a positive whole number.';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
+  const handleSubmit = () => {
+    if (validateFields()) {
+      // Submit data
+    }
+  };
 
   return (
     <View style={styles.fullScreen}>
       <ScrollView style={styles.container}>
         <Text style={styles.headerText}>Create Your Event</Text>
 
-        <View style={styles.inputContainer}>
-          <Icon name="text-box-outline" size={24} color="#FFF" />
-          <TextInput
-            style={styles.input}
-            placeholder="Event name"
-            placeholderTextColor="#FFF"
-            value={eventName}
-            onChangeText={setEventName}
-          />
+        <View style={styles.inputWithErrorContainer}>
+          {errors.eventName && (
+            <Text style={styles.errorText}>{errors.eventName}</Text>
+          )}
+          <View style={styles.inputContainer}>
+            <Icon name="text-box-outline" size={24} color="white" />
+            <TextInput
+              style={styles.input}
+              placeholder="Event name"
+              placeholderTextColor="gray"
+              value={eventName}
+              onChangeText={setEventName}
+            />
+          </View>
         </View>
 
-        <View style={styles.inputContainer}>
-          <Icon name="calendar-range" size={24} color="#FFF" />
-          <TextInput
-            style={styles.input}
-            placeholder="Date, time"
-            placeholderTextColor="#FFF"
-            value={date}
-            onChangeText={setDate}
-          />
+        <View style={styles.inputWithErrorContainer}>
+          {errors.date && <Text style={styles.errorText}>{errors.date}</Text>}
+          <View style={styles.inputContainer}>
+            <Icon name="calendar-range" size={24} color="white" />
+            <TextInput
+              style={styles.input}
+              placeholder="Date, time"
+              placeholderTextColor="gray"
+              value={date}
+              onChangeText={setDate}
+            />
+          </View>
         </View>
 
-        <View style={styles.inputContainer}>
-          <Icon name="map-marker-outline" size={24} color="#FFF" />
-          <TextInput
-            style={styles.input}
-            placeholder="Location"
-            placeholderTextColor="#FFF"
-            value={location}
-            onChangeText={setLocation}
-          />
+        <View style={styles.inputWithErrorContainer}>
+          {errors.location && (
+            <Text style={styles.errorText}>{errors.location}</Text>
+          )}
+          <View style={styles.inputContainer}>
+            <Icon name="map-marker-outline" size={24} color="white" />
+            <TextInput
+              style={styles.input}
+              placeholder="Location"
+              placeholderTextColor="gray"
+              value={location}
+              onChangeText={setLocation}
+            />
+          </View>
         </View>
-
-        <View style={styles.inputContainer}>
-          <Icon name="account-group-outline" size={24} color="#FFF" />
-          <TextInput
-            style={styles.input}
-            placeholder="Limit"
-            placeholderTextColor="#FFF"
-            value={limit}
-            onChangeText={setLimit}
-            keyboardType="numeric"
-          />
+        <View style={styles.inputWithErrorContainer}>
+          {errors.limit && <Text style={styles.errorText}>{errors.limit}</Text>}
+          <View style={styles.inputContainer}>
+            <Icon name="account-group-outline" size={24} color="white" />
+            <TextInput
+              style={styles.input}
+              placeholder="Limit"
+              placeholderTextColor="gray"
+              value={limit}
+              onChangeText={(text) => setLimit(text.replace(/[^0-9]/g, ''))}
+              keyboardType="numeric"
+            />
+          </View>
         </View>
 
         <View style={styles.inputContainer}>
           <TextInput
             style={[styles.input, styles.description]}
             placeholder="Description"
-            placeholderTextColor="#FFF"
+            placeholderTextColor="gray"
             value={description}
             onChangeText={setDescription}
             multiline
@@ -87,7 +135,7 @@ const CreateEventScreen = () => {
           <Switch onValueChange={setIsPublic} value={isPublic} />
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.floatingButton} onPress={() => {}}>
+      <TouchableOpacity style={styles.floatingButton} onPress={handleSubmit}>
         <Text style={styles.floatingButtonText}>Post</Text>
       </TouchableOpacity>
     </View>
@@ -95,6 +143,10 @@ const CreateEventScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  fullScreen: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
   container: {
     flex: 1,
     padding: 20,
@@ -106,13 +158,15 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 20,
   },
+  inputWithErrorContainer: {
+    marginBottom: 20,
+  },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: theme.colors.primary,
     borderRadius: 5,
     paddingLeft: 10,
-    marginBottom: 20,
   },
   input: {
     flex: 1,
@@ -123,6 +177,15 @@ const styles = StyleSheet.create({
   description: {
     height: 100,
     textAlignVertical: 'top',
+    color: 'white',
+  },
+  errorText: {
+    position: 'absolute',
+    top: -20,
+    left: 10,
+    color: 'red',
+    fontSize: 14,
+    zIndex: 5,
   },
   switchContainer: {
     flexDirection: 'row',
@@ -132,22 +195,6 @@ const styles = StyleSheet.create({
   },
   switchLabel: {
     fontSize: theme.fonts.regular.fontSize,
-  },
-  button: {
-    backgroundColor: theme.colors.primary,
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: theme.fonts.big.fontSize,
-    fontWeight: 'bold',
-  },
-  fullScreen: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-    paddingBottom: 80,
   },
   floatingButton: {
     position: 'absolute',
