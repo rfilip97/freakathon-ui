@@ -9,22 +9,23 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import theme from '../../theme';
-import { Repository } from '../../repository/index';
+import { useLogin, AuthStates } from '../../hooks/useLogin';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
-    try {
-      const response = await Repository.login(email, password);
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'MainTabs' }],
-      });
-    } catch (error) {
-      console.log('Login Failed:', error);
-    }
+  const redirectToMainTabs = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainTabs' }],
+    });
+  };
+
+  const [authState, login] = useLogin(redirectToMainTabs);
+
+  const handleLogin = () => {
+    login(email, password);
   };
 
   const handleForgotPassword = () => {
@@ -66,6 +67,10 @@ const LoginScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
+        {authState === AuthStates.LOADING && <Text style={styles.statusText}>Loading...</Text>}
+        {authState === AuthStates.DENIED && (
+          <Text style={styles.statusText}>Login Failed. Please try again.</Text>
+        )}
         <Text style={styles.forgotPassword} onPress={handleForgotPassword}>
           Forgot your Password?
         </Text>
@@ -123,6 +128,9 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
     textDecorationLine: 'underline',
   },
+	statusText: {
+		paddingBottom: 5
+	}
 });
 
 export default LoginScreen;
