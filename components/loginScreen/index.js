@@ -9,18 +9,22 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import theme from '../../theme';
+import { Repository } from '../../repository/index';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    console.log('Login pressed');
-
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'MainTabs' }],
-    });
+  const handleLogin = async () => {
+    try {
+      const response = await Repository.login(email, password);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'MainTabs' }],
+      });
+    } catch (error) {
+      console.log('Login Failed:', error);
+    }
   };
 
   const handleForgotPassword = () => {
