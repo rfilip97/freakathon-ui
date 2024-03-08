@@ -51,10 +51,9 @@ const LoginScreen = ({ navigation }) => {
         />
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="Username/Email"
           value={email}
           onChangeText={setEmail}
-          keyboardType="email-address"
           autoCapitalize="none"
         />
         <TextInput
