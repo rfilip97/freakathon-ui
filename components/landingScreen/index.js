@@ -10,15 +10,15 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import theme from '../../theme';
 
-const handleSignUpPress = () => {
-  console.log('Sign Up pressed');
-};
-
 const LandingPage = () => {
   const navigation = useNavigation();
 
   const handleLoginPress = () => {
     navigation.navigate('Login');
+  };
+
+  const handleSignUpPress = () => {
+    navigation.navigate('Register');
   };
 
   return (
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 100,
     borderRadius: 25,
     marginVertical: 5,
-    marginBottom: 20
+    marginBottom: 20,
   },
   loginButtonText: {
     color: 'black',
