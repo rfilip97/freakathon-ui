@@ -85,7 +85,7 @@ const RegisterScreen = ({ navigation }) => {
           <Text style={styles.loginButtonText}>Register</Text>
         </TouchableOpacity>
         {authState === AuthStates.LOADING && <Text style={styles.statusText}>Loading...</Text>}
-        {authState === AuthStates.DENIED && (
+        {authState === AuthStates.ERROR && (
           <Text style={styles.statusText}>Registration Failed. Please try again.</Text>
         )}
       </View>
