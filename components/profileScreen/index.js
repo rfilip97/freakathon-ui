@@ -11,11 +11,15 @@ import EventSection from './eventSection';
 import InterestsSection from './interestsSection';
 import ProfileSection from './profileSection';
 import theme from '../../theme';
+import { useSelector } from 'react-redux';
+import { getUserDetails } from '../../redux/selectors'
 
 const ProfileScreen = ({ navigation }) => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
   const username = 'Popa Ionica';
   const userTag = '@maimutadepresiva21';
+
+  const userDetails = useSelector(getUserDetails);
 
   return (
     <View style={styles.fullScreen}>

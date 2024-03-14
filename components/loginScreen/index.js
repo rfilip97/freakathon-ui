@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,17 +9,22 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import theme from '../../theme';
+import { useDispatch } from 'react-redux';
+import { setUserDetails } from '../../redux/actions/userActions';
 import { useLogin, AuthStates } from '../../hooks/useLogin';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  const redirectToMainTabs = () => {
+  const redirectToMainTabs = (userData) => {
     navigation.reset({
       index: 0,
       routes: [{ name: 'MainTabs' }],
     });
+
+    dispatch(setUserDetails(userData));
   };
 
   const [authState, login] = useLogin(redirectToMainTabs);

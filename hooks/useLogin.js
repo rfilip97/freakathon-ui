@@ -14,9 +14,14 @@ function useLogin(onSuccess) {
   const login = async (identity, password) => {
     setAuthState(AuthStates.LOADING);
     try {
-      await Repository.login(identity, password);
-      setAuthState(AuthStates.LOGGED);
-      onSuccess();
+      const data = await Repository.login(identity, password);
+      if (data.token) {
+        setAuthState(AuthStates.LOGGED);
+        onSuccess(data);
+      } else {
+        console.error('Login succeeded but no token received.');
+        setAuthState(AuthStates.DENIED);
+      }
     } catch (error) {
       console.log('Login Failed:', error);
       setAuthState(AuthStates.DENIED);

@@ -1,15 +1,21 @@
+import { SET_USER_DETAILS } from "../actions/userActions";
+
 const initialState = {
-  firstName: '',
-  lastName: '',
+  id: '',
+  name: '',
+  username: '',
+  email: '',
+  avatar: '',
+  tag: '',
+  token: ''
 };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
-    case 'SET_USER_DETAILS':
+    case SET_USER_DETAILS:
       return {
         ...state,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
+        ...action.payload
       };
     default:
       return state;
