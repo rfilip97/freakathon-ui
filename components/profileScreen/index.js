@@ -16,17 +16,16 @@ import { getUserDetails } from '../../redux/selectors'
 
 const ProfileScreen = ({ navigation }) => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
-  const username = 'Popa Ionica';
-  const userTag = '@maimutadepresiva21';
-
   const userDetails = useSelector(getUserDetails);
+
+  const { name, tag } = userDetails
 
   return (
     <View style={styles.fullScreen}>
       <ScrollView style={styles.container}>
         <ProfileSection
-          username={username}
-          userTag={userTag}
+          username={name}
+          userTag={tag}
           navigation={navigation}
         />
         <InterestsSection interests={interests} setInterests={setInterests} />
