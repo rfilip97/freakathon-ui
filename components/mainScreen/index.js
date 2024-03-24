@@ -13,12 +13,6 @@ const MainScreen = () => {
 
   return (
     <View style={styles.container}>
-      {isSearching && (
-        <View style={styles.banner}>
-          <Ionicons name="hourglass" size={20} color="white" />
-          <Text style={styles.bannerText}>We are looking for a chat...</Text>
-        </View>
-      )}
       <Image source={require('../../assets/peepos.png')} style={styles.image} />
       <Text style={styles.description}>
         Engage in intriguing, anonymous chats with like-minded individuals
@@ -29,11 +23,18 @@ const MainScreen = () => {
         and preferences for a meaningful exchange.
       </Text>
       <TouchableOpacity
-        style={[styles.button, isSearching ? styles.buttonInactive : styles.buttonActive]}
+        style={[
+          styles.button,
+          isSearching ? styles.buttonInactive : styles.buttonActive,
+        ]}
         onPress={handlePress}
         disabled={isSearching}
       >
-        <Icon name="incognito" size={20} color="white" />
+        {isSearching ? (
+          <Ionicons name="hourglass" size={20} color="white" />
+        ) : (
+          <Icon name="incognito" size={20} color="white" />
+        )}
         <Text style={styles.buttonText}>Request an anonymous chat</Text>
       </TouchableOpacity>
     </View>
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     width: '100%',
     marginBottom: 20,
-    borderRadius: 10
+    borderRadius: 10,
   },
   bannerText: {
     color: 'white',
