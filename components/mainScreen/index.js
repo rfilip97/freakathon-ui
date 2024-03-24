@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import theme from '../../theme';
-import image from '../../assets/peepos.png'
+import image from '../../assets/peepos.png';
+import AnonymousGroups from './anonymousChats';
 
 const MainScreen = () => {
   const [isSearching, setIsSearching] = useState(false);
@@ -13,44 +14,61 @@ const MainScreen = () => {
     setIsSearching(true);
   };
 
-  return (
-    <View style={styles.container}>
-      <View>
-      { haveActiveChat ? <NoChatView/> : <View/>}
+  const NoChatView = () => {
+    return (
+      <View style={styles.container}>
+        <Image source={image} style={styles.image} />
+        <Text style={styles.description}>
+          Engage in intriguing, anonymous chats with like-minded individuals
+          through our "Anonymous Conversation" feature. Over a 24/48 hour
+          period, connect, share, and decide whether to reveal your identities
+          and maintain the group, or leave the chat with the mystery preserved.
+          A single tap initiates a tailored matchmaking process, aligning
+          interests and preferences for a meaningful exchange.
+        </Text>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            isSearching ? styles.buttonInactive : styles.buttonActive,
+          ]}
+          onPress={handlePress}
+          disabled={isSearching}
+        >
+          {isSearching ? (
+            <Ionicons name="hourglass" size={20} color="white" />
+          ) : (
+            <Icon name="incognito" size={20} color="white" />
+          )}
+          <Text style={styles.buttonText}>Request an anonymous chat</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={[
-          styles.button,
-          isSearching ? styles.buttonInactive : styles.buttonActive,
-        ]}
-        onPress={handlePress}
-        disabled={isSearching}
-      >
-        {isSearching ? (
-          <Ionicons name="hourglass" size={20} color="white" />
-        ) : (
-          <Icon name="incognito" size={20} color="white" />
-        )}
-        <Text style={styles.buttonText}>Request an anonymous chat</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+    );
+  };
 
-const NoChatView = () => {
-  return (
-    <View>
-      <Image source={image} style={styles.image} />
-      <Text style={styles.description}>
-        Engage in intriguing, anonymous chats with like-minded individuals
-        through our "Anonymous Conversation" feature. Over a 24/48 hour period,
-        connect, share, and decide whether to reveal your identities and
-        maintain the group, or leave the chat with the mystery preserved. A
-        single tap initiates a tailored matchmaking process, aligning interests
-        and preferences for a meaningful exchange.
-      </Text>
-    </View>
-  );
+  const WithActiveChat = () => {
+    return (
+      <View style={styles.container}>
+        <AnonymousGroups />
+        <TouchableOpacity
+          style={[
+            styles.button,
+            isSearching ? styles.buttonInactive : styles.buttonActive,
+          ]}
+          onPress={handlePress}
+          disabled={isSearching}
+        >
+          {isSearching ? (
+            <Ionicons name="hourglass" size={20} color="white" />
+          ) : (
+            <Icon name="incognito" size={20} color="white" />
+          )}
+          <Text style={styles.buttonText}>Request an anonymous chat</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  return haveActiveChat ? <WithActiveChat /> : <NoChatView />;
 };
 
 const styles = StyleSheet.create({
