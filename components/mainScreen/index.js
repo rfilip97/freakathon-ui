@@ -39,7 +39,7 @@ const MainScreen = () => {
           ) : (
             <Icon name="incognito" size={20} color="white" />
           )}
-          <Text style={styles.buttonText}>Request an anonymous chat</Text>
+          <Text style={styles.buttonText}>{isSearching ? 'Requested' : 'Request'} an anonymous chat</Text>
         </TouchableOpacity>
       </View>
     );
@@ -62,7 +62,7 @@ const MainScreen = () => {
           ) : (
             <Icon name="incognito" size={20} color="white" />
           )}
-          <Text style={styles.buttonText}>Request an anonymous chat</Text>
+          <Text style={styles.buttonText}>{isSearching ? 'Requested' : 'Request'} an anonymous chat</Text>
         </TouchableOpacity>
       </View>
     );
