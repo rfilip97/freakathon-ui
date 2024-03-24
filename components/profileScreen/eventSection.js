@@ -16,6 +16,7 @@ const EventSection = ({ events }) => {
           location={event.location}
           date={event.date}
           participants={event.participants}
+          joined={event.joined}
         />
       ))}
     </View>

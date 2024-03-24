@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import theme from '../../theme';
 
 const EventCard = ({
@@ -9,6 +9,7 @@ const EventCard = ({
   location,
   participants,
   date,
+  joined,
 }) => {
   return (
     <View style={styles.card}>
@@ -29,9 +30,17 @@ const EventCard = ({
           </Text>
         </View>
       </View>
-      <View style={styles.cardFooter}>
-        <Text style={styles.footerText}>Join on {date}</Text>
-      </View>
+      <TouchableOpacity>
+        {joined ? (
+          <View style={styles.cardFooterJoined}>
+            <Text style={styles.footerText}>Joined on {date}</Text>
+          </View>
+        ) : (
+          <View style={styles.cardFooter}>
+            <Text style={styles.footerText}>Join on {date}</Text>
+          </View>
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -95,6 +104,10 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
     backgroundColor: theme.colors.primary,
+    padding: 10,
+  },
+  cardFooterJoined: {
+    backgroundColor: theme.colors.primaryFocused,
     padding: 10,
   },
   footerText: {

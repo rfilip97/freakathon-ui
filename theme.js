@@ -5,6 +5,7 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#8C1111',
+    primaryFocused: '#5D1111',
     secondary: '#FBF4F4',
     gray: '#f0f0f0',
   },

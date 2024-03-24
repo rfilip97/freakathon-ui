@@ -7,5 +7,6 @@ export default events = [
     location: 'Razvan Residence Nr.14',
     date: '23 Feb 2024 17:00',
     participants: '3/6 joined',
+    joined: true
   },
 ];

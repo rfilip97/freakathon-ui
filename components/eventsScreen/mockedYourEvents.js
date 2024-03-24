@@ -7,6 +7,7 @@ export default events = [
     location: 'Razvan Residence Nr.14',
     date: '23 Feb 2024 17:00',
     participants: '3/6 joined',
+    joined: true
   },
   {
     title: 'Chess Night',
@@ -16,5 +17,6 @@ export default events = [
     location: 'Hilton Hotel Nr.14',
     date: '23 Feb 2024 17:00',
     participants: '1/6 joined',
+    joined: true
   },
 ];
