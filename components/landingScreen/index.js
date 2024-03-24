@@ -24,7 +24,7 @@ const LandingPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upperHalf}>
-        <Text style={styles.logo}>MEETY</Text>
+        <Text style={styles.logo}>Linking Locals</Text>
         <Image
           source={require('../../assets/peepos.png')}
           style={styles.image}

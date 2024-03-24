@@ -13,7 +13,7 @@ const CustomHeader = ({ navigation, back }) => {
       {back ? (
         <Appbar.BackAction onPress={navigation.goBack} color="white" />
       ) : null}
-      <Appbar.Content title="MEETY" titleStyle={styles.logo} />
+      <Appbar.Content title="Linking Locals" titleStyle={styles.logo} />
       <View style={styles.profileIconContainer}>
         <TouchableOpacity
           onPress={handleProfileIconPress}

@@ -11,7 +11,8 @@ const useFonts = () => {
         await SplashScreen.preventAutoHideAsync();
         await Font.loadAsync({
           MochiyPopOne: require('../assets/fonts/MochiyPopOne-Regular.ttf'),
-          Sarina: require('../assets/fonts/Sarina-Regular.ttf')
+          Sarina: require('../assets/fonts/Sarina-Regular.ttf'),
+          Shrikhand: require('../assets/fonts/Shrikhand-Regular.ttf')
         });
       } catch (e) {
         console.warn(e);

@@ -10,7 +10,7 @@ const theme = {
   },
   fonts: {
     logo: {
-      fontFamily: 'Sarina',
+      fontFamily: 'Shrikhand',
       fontWeight: 'normal',
       fontSize: 24,
       color: 'white'
