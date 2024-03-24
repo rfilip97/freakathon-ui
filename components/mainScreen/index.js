@@ -3,9 +3,11 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import theme from '../../theme';
+import image from '../../assets/peepos.png'
 
 const MainScreen = () => {
   const [isSearching, setIsSearching] = useState(false);
+  const [haveActiveChat, setHaveActiveChat] = useState(true);
 
   const handlePress = () => {
     setIsSearching(true);
@@ -13,15 +15,9 @@ const MainScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/peepos.png')} style={styles.image} />
-      <Text style={styles.description}>
-        Engage in intriguing, anonymous chats with like-minded individuals
-        through our "Anonymous Conversation" feature. Over a 24/48 hour period,
-        connect, share, and decide whether to reveal your identities and
-        maintain the group, or leave the chat with the mystery preserved. A
-        single tap initiates a tailored matchmaking process, aligning interests
-        and preferences for a meaningful exchange.
-      </Text>
+      <View>
+      { haveActiveChat ? <NoChatView/> : <View/>}
+      </View>
       <TouchableOpacity
         style={[
           styles.button,
@@ -37,6 +33,22 @@ const MainScreen = () => {
         )}
         <Text style={styles.buttonText}>Request an anonymous chat</Text>
       </TouchableOpacity>
+    </View>
+  );
+};
+
+const NoChatView = () => {
+  return (
+    <View>
+      <Image source={image} style={styles.image} />
+      <Text style={styles.description}>
+        Engage in intriguing, anonymous chats with like-minded individuals
+        through our "Anonymous Conversation" feature. Over a 24/48 hour period,
+        connect, share, and decide whether to reveal your identities and
+        maintain the group, or leave the chat with the mystery preserved. A
+        single tap initiates a tailored matchmaking process, aligning interests
+        and preferences for a meaningful exchange.
+      </Text>
     </View>
   );
 };
