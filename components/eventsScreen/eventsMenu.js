@@ -1,6 +1,8 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import AllEventsScreen from './allEventsScreen';
+import YourEventsScreen from './yourEventsScreen';
+import AttendingEventsScreen from './attendingEvents';
 import theme from '../../theme';
 
 const Tab = createMaterialTopTabNavigator();
@@ -32,12 +34,12 @@ const EventsMenu = () => {
       />
       <Tab.Screen
         name="YourEvents"
-        component={AllEventsScreen}
+        component={YourEventsScreen }
         options={{ tabBarLabel: 'Your Events' }}
       />
       <Tab.Screen
         name="AttendingEvents"
-        component={AllEventsScreen}
+        component={AttendingEventsScreen }
         options={{ tabBarLabel: 'Attending Events' }}
       />
     </Tab.Navigator>

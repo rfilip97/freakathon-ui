@@ -12,18 +12,18 @@ import { PaperProvider } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import EventSection from '../profileScreen/eventSection';
-import mockedAllEvents from './mockedAllEvents';
+import mockedYourEvents from './mockedYourEvents';
 
 const Tab = createMaterialTopTabNavigator();
 
-const AllEventsScreen = () => {
+const YourEventsScreen = () => {
   return (
     <View>
       <ScrollView >
-        <EventSection events={mockedAllEvents} />
+        <EventSection events={mockedYourEvents } />
       </ScrollView>
     </View>
   );
 }
 
-export default AllEventsScreen;
+export default YourEventsScreen;
