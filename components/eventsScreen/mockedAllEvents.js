@@ -7,25 +7,26 @@ export default events = [
     location: 'Razvan Residence Nr.14',
     date: '23 Feb 2024 17:00',
     participants: '3/6 joined',
+    joined: true
   },
   {
-    title: 'Chess Night',
-    emoji: '♟️',
+    title: 'Superhero Costume Run',
+    emoji: '🦸‍♀️',
     description:
-      'Greetings, Brave Adventurer! You are cordially invited to a night of mystery, magic, and endless adventure.',
-    location: 'Hilton Hotel Nr.14',
-    date: '23 Feb 2024 17:00',
-    participants: '1/6 joined',
+      'It’s a bird, it’s a plane, it’s...you, in spandex! Dash through the city in your best hero (or villain) getup in this fun run for charity.',
+    location: 'Metro Park',
+    date: '02 May 2024 09:00',
+    participants: '15/50 joined',
     joined: true,
   },
   {
-    title: 'Karaoke Extravaganza',
-    emoji: '🎤',
+    title: 'Alien Encounter Support Group',
+    emoji: '👽',
     description:
-      'Step into the spotlight! Join us for an evening of tunes, talent, and maybe a few laughs. No vocal skills required, just a willingness to drop the mic!',
-    location: 'The Singing Crab Pub',
-    date: '10 Apr 2024 20:00',
-    participants: '5/20 joined',
+      'Been abducted recently? Share your otherworldly experiences and tips on how to deal with intergalactic jetlag at our weekly meetings.',
+    location: 'Area 52 Cafe',
+    date: '09 May 2024 18:00',
+    participants: '2/12 joined',
   },
   {
     title: '80s Retro Gaming Marathon',
@@ -46,23 +47,13 @@ export default events = [
     participants: '4/10 joined',
   },
   {
-    title: 'Superhero Costume Run',
-    emoji: '🦸‍♀️',
+    title: 'Karaoke Extravaganza',
+    emoji: '🎤',
     description:
-      'It’s a bird, it’s a plane, it’s...you, in spandex! Dash through the city in your best hero (or villain) getup in this fun run for charity.',
-    location: 'Metro Park',
-    date: '02 May 2024 09:00',
-    participants: '15/50 joined',
-    joined: true,
-  },
-  {
-    title: 'Alien Encounter Support Group',
-    emoji: '👽',
-    description:
-      'Been abducted recently? Share your otherworldly experiences and tips on how to deal with intergalactic jetlag at our weekly meetings.',
-    location: 'Area 52 Cafe',
-    date: '09 May 2024 18:00',
-    participants: '2/12 joined',
+      'Step into the spotlight! Join us for an evening of tunes, talent, and maybe a few laughs. No vocal skills required, just a willingness to drop the mic!',
+    location: 'The Singing Crab Pub',
+    date: '10 Apr 2024 20:00',
+    participants: '5/20 joined',
   },
   {
     title: 'Underwater Basket Weaving',
