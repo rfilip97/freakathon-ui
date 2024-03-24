@@ -3,8 +3,8 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FriendListScreen from '../../friendListScreen';
 import MainScreen from '../../mainScreen';
-import StartBuzzScreen from '../../startBuzzScreen';
 import theme from '../../../theme';
+import EventsScreen from '../../eventsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,8 +16,8 @@ const NavigatorMenu = () => {
           let iconName;
           if (route.name === 'Main') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'StartABuzz') {
-            iconName = focused ? 'flash' : 'flash-outline';
+          } else if (route.name === 'Events') {
+            iconName = focused ? 'calendar' : 'calendar-outline';
           } else if (route.name === 'FriendList') {
             iconName = focused ? 'people' : 'people-outline';
           }
@@ -38,9 +38,9 @@ const NavigatorMenu = () => {
         options={{ title: 'Home', headerShown: false }}
       />
       <Tab.Screen
-        name="StartABuzz"
-        component={StartBuzzScreen}
-        options={{ title: 'Start a Buzz', headerShown: false }}
+        name="Events"
+        component={EventsScreen}
+        options={{ title: 'Events', headerShown: false }}
       />
       <Tab.Screen
         name="FriendList"

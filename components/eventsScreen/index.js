@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { friends } from '../friendListScreen';
 
-const StartBuzzScreen = ({ navigation }) => {
+const EventsScreen = ({ navigation }) => {
   const [isSearching, setIsSearching] = useState(false);
 
   const startSearch = () => {
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StartBuzzScreen;
+export default EventsScreen;
