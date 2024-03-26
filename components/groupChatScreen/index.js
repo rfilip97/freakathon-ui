@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -26,6 +26,13 @@ const GroupChatScreen = () => {
   ]);
   const [text, setText] = useState('');
   const currentUser = 'SlyFox43';
+  const flatListRef = useRef(null);
+
+  useEffect(() => {
+    if (flatListRef.current) {
+      flatListRef.current.scrollToEnd({ animated: true });
+    }
+  }, [messages]);
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
@@ -75,6 +82,7 @@ const GroupChatScreen = () => {
     <View style={styles.container}>
       <View style={styles.messagesContainer}>
         <FlatList
+          ref={flatListRef}
           data={messages}
           ListHeaderComponent={ChatHeader}
           keyExtractor={(item) => item.timestamp.toString()}
