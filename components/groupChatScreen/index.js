@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   StyleSheet,
+  Image,
 } from 'react-native';
 
 const GroupChatScreen = () => {
@@ -72,6 +73,7 @@ const GroupChatScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ChatHeader />
       <View style={styles.messagesContainer}>
         <FlatList
           data={messages}
@@ -90,6 +92,49 @@ const GroupChatScreen = () => {
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>
       </View>
+    </View>
+  );
+};
+
+const ChatHeader = () => {
+  return (
+    <View style={styles.headerContainer}>
+      <View style={styles.imagesOverlapContainer}>
+        <View style={[styles.circle, { backgroundColor: '#FFD700' }]}>
+          <Image
+            source={require('../../assets/emo-bear.png')}
+            style={styles.animalImage}
+          />
+        </View>
+        <View
+          style={[
+            styles.circle,
+            styles.overlapImage,
+            { backgroundColor: '#008000' },
+          ]}
+        >
+          <Image
+            source={require('../../assets/emo-frog.png')}
+            style={styles.animalImage}
+          />
+        </View>
+        <View
+          style={[
+            styles.circle,
+            styles.overlapImage,
+            { backgroundColor: '#FFA500', zIndex: 3 },
+          ]}
+        >
+          <Image
+            source={require('../../assets/emo-fox.png')}
+            style={styles.animalImage}
+          />
+        </View>
+      </View>
+      <Text style={styles.descriptionText}>
+        One day, SlyFox43 met HappyFrog56 and FluffyBear92 in the forest, and
+        this was the beginning of a long friendship.
+      </Text>
     </View>
   );
 };
@@ -202,6 +247,42 @@ const styles = StyleSheet.create({
   sendButtonText: {
     color: 'white',
     fontSize: 16,
+  },
+  // header styles
+  headerContainer: {
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  imagesOverlapContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  circle: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 2,
+    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: -15,
+    zIndex: 1,
+  },
+  animalImage: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
+  },
+  overlapImage: {
+    zIndex: 2,
+    marginLeft: -15,
+  },
+  descriptionText: {
+    textAlign: 'center',
+    fontSize: 16,
+    paddingHorizontal: 20,
   },
 });
 
