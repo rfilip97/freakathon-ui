@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import theme from '../../theme';
 
@@ -22,7 +22,7 @@ const DATA = [
   },
 ];
 
-const AnonymousGroupsScreen = () => {
+const AnonymousGroupsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Anonymous Groups:</Text>
@@ -30,19 +30,25 @@ const AnonymousGroupsScreen = () => {
         data={DATA}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.groupContainer}>
-            <View style={styles.iconContainer}>
-              <Icon name={item.icon} size={30} style={styles.icon} />
+          <TouchableOpacity
+            style={styles.friendContainer}
+            onPress={() => navigation.navigate('Chat', { friend: item })}
+            activeOpacity={0.6}
+          >
+            <View style={styles.groupContainer}>
+              <View style={styles.iconContainer}>
+                <Icon name={item.icon} size={30} style={styles.icon} />
+              </View>
+              <View style={styles.groupInfo}>
+                <Text style={styles.groupName}>{item.groupName}</Text>
+                <Text style={styles.lastMessage}>{item.lastMessage}</Text>
+              </View>
+              <View style={styles.groupMeta}>
+                <Text style={styles.timeAgo}>{item.timeAgo}</Text>
+                <Text style={styles.category}>{item.category}</Text>
+              </View>
             </View>
-            <View style={styles.groupInfo}>
-              <Text style={styles.groupName}>{item.groupName}</Text>
-              <Text style={styles.lastMessage}>{item.lastMessage}</Text>
-            </View>
-            <View style={styles.groupMeta}>
-              <Text style={styles.timeAgo}>{item.timeAgo}</Text>
-              <Text style={styles.category}>{item.category}</Text>
-            </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>
@@ -91,7 +97,7 @@ const styles = StyleSheet.create({
   groupMeta: {
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    gap: '6%'
+    gap: '6%',
   },
   timeAgo: {
     fontSize: 12,

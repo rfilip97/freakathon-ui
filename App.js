@@ -18,6 +18,7 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useDeepLinking from './hooks/useDeepLinking';
+import GroupChatScreen from './components/groupChatScreen';
 
 const RootStack = createNativeStackNavigator();
 
@@ -53,6 +54,7 @@ const App = () => {
             />
             <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
             <RootStack.Screen name="Chat" component={ChatScreen} />
+            <RootStack.Screen name="GroupChat" component={GroupChatScreen} />
             <RootStack.Screen
               name="FindFriends"
               component={FindFriendsScreen}

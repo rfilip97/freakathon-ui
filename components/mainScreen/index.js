@@ -6,7 +6,7 @@ import theme from '../../theme';
 import image from '../../assets/peepos.png';
 import AnonymousGroups from './anonymousChats';
 
-const MainScreen = () => {
+const MainScreen = ({ navigation }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [haveActiveChat, setHaveActiveChat] = useState(true);
 
@@ -45,10 +45,10 @@ const MainScreen = () => {
     );
   };
 
-  const WithActiveChat = () => {
+  const WithActiveChat = ({ navigation }) => {
     return (
       <View style={styles.container}>
-        <AnonymousGroups />
+        <AnonymousGroups navigation={navigation}/>
         <TouchableOpacity
           style={[
             styles.button,
@@ -68,7 +68,7 @@ const MainScreen = () => {
     );
   };
 
-  return haveActiveChat ? <WithActiveChat /> : <NoChatView />;
+  return haveActiveChat ? <WithActiveChat navigation={navigation}/> : <NoChatView />;
 };
 
 const styles = StyleSheet.create({
