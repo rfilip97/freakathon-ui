@@ -29,9 +29,13 @@ const GroupChatScreen = () => {
   const flatListRef = useRef(null);
 
   useEffect(() => {
-    if (flatListRef.current) {
-      flatListRef.current.scrollToEnd({ animated: true });
-    }
+    const timer = setTimeout(() => {
+      if (flatListRef.current) {
+        flatListRef.current.scrollToEnd({ animated: true });
+      }
+    }, 50);
+
+    return () => clearTimeout(timer);
   }, [messages]);
 
   const formatTime = (timestamp) => {
@@ -265,7 +269,6 @@ const styles = StyleSheet.create({
   // header styles
   headerContainer: {
     alignItems: 'center',
-    marginTop: 20,
   },
   imagesOverlapContainer: {
     flexDirection: 'row',
