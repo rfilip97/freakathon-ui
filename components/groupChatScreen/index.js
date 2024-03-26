@@ -73,10 +73,10 @@ const GroupChatScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ChatHeader />
       <View style={styles.messagesContainer}>
         <FlatList
           data={messages}
+          ListHeaderComponent={ChatHeader}
           keyExtractor={(item) => item.timestamp.toString()}
           renderItem={renderMessage}
         />
