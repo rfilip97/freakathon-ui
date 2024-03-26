@@ -100,7 +100,13 @@ const ChatHeader = () => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.imagesOverlapContainer}>
-        <View style={[styles.circle, { backgroundColor: '#FFD700' }]}>
+        <View
+          style={[
+            styles.circle,
+            styles.leftCircle,
+            { backgroundColor: '#FFD700' },
+          ]}
+        >
           <Image
             source={require('../../assets/emo-bear.png')}
             style={styles.animalImage}
@@ -109,7 +115,7 @@ const ChatHeader = () => {
         <View
           style={[
             styles.circle,
-            styles.overlapImage,
+            styles.middleCircle,
             { backgroundColor: '#008000' },
           ]}
         >
@@ -121,8 +127,8 @@ const ChatHeader = () => {
         <View
           style={[
             styles.circle,
-            styles.overlapImage,
-            { backgroundColor: '#FFA500', zIndex: 3 },
+            styles.rightCircle,
+            { backgroundColor: '#FFA500' },
           ]}
         >
           <Image
@@ -283,6 +289,42 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     paddingHorizontal: 20,
+    color: 'gray',
+    paddingVertical: 20,
+  },
+  imagesOverlapContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circle: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 2,
+    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  animalImage: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
+  },
+  overlapImage: {
+    position: 'absolute',
+  },
+  leftCircle: {
+    zIndex: 1,
+  },
+  middleCircle: {
+    zIndex: 3,
+    marginLeft: -20,
+    marginTop: 30,
+  },
+  rightCircle: {
+    zIndex: 1,
+    marginLeft: -20,
   },
 });
 
