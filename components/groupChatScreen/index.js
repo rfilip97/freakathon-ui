@@ -3,91 +3,82 @@ import {
   View,
   Text,
   TextInput,
-  Button,
+  TouchableOpacity,
   FlatList,
   StyleSheet,
-  Image,
 } from 'react-native';
-import theme from '../../theme';
 
-const GroupChatScreen = ({ route }) => {
-  const { friend } = route.params;
-  const [messages, setMessages] = useState([]);
+const GroupChatScreen = () => {
+  const [messages, setMessages] = useState([
+    {
+      timestamp: Date.now() - 3000,
+      sender: 'FluffyBear92',
+      value: 'Hey there!',
+      color: '#DFF8C8',
+    },
+    {
+      timestamp: Date.now() - 2000,
+      sender: 'HappyFrog56',
+      value: "Hello, my new friends! I'm happy to meet you. What's up?",
+      color: '#FED8B1',
+    },
+  ]);
   const [text, setText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
+  const currentUser = 'SlyFox43';
 
-  const hardcodedResponses = [
-    'Javascript is my life!',
-    'Hold on, let me overthink this.',
-    'Beep boop, I am a human. Totally.',
-    'I’m not lazy, I’m on energy-saving mode.',
-    'Can confirm, I’m not a robot. I’ve never even seen a captcha.',
-    'Just dropped my taco...crisis mode activated!',
-    'I would tell you a UDP joke, but you might not get it.',
-    'I’m not arguing, I’m just explaining why I’m right.',
-    'I’m not superstitious, but I am a little stitious.',
-    'I’m not insulting you, I’m describing you.',
-    'I’m really good at stuff until people watch me do that stuff.',
-    'Some days, the best thing about my job is that the chair spins.',
-    'Smile while you still have teeth.',
-    'If at first you don’t succeed, then skydiving definitely isn’t for you.',
-  ];
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp);
+    return `${date.getHours()}:${date
+      .getMinutes()
+      .toString()
+      .padStart(2, '0')}`;
+  };
 
   const sendMessage = () => {
     if (text) {
-      const newMessage = { id: `user_${Date.now()}`, text, sender: 'user' };
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      const newMessage = {
+        timestamp: Date.now(),
+        sender: currentUser,
+        value: text,
+        color: '#FFFFFF',
+      };
+
+      setMessages([...messages, newMessage]);
       setText('');
-
-      setTimeout(() => {
-        setIsTyping(true);
-
-        setTimeout(() => {
-          const randomIndex = Math.floor(
-            Math.random() * hardcodedResponses.length
-          );
-          const randomResponse = hardcodedResponses[randomIndex];
-
-          const responseMessage = {
-            id: `friend_${Date.now()}`,
-            text: randomResponse,
-            sender: 'friend',
-          };
-          setIsTyping(false);
-          setMessages((prevMessages) => [...prevMessages, responseMessage]);
-        }, 3000);
-      }, 1000);
     }
+  };
+
+  const renderMessage = ({ item }) => {
+    const isCurrentUser = item.sender === currentUser;
+    const messageStyle = isCurrentUser
+      ? styles.currentUserMessage
+      : styles.otherUserMessage;
+    const messageBoxStyle = {
+      ...styles.messageBox,
+      backgroundColor: item.color,
+      alignSelf: isCurrentUser ? 'flex-end' : 'flex-start',
+    };
+
+    return (
+      <View style={messageStyle}>
+        <View style={messageBoxStyle}>
+          <Text style={styles.senderName}>{item.sender}</Text>
+          <Text style={styles.messageValue}>{item.value}</Text>
+          <Text style={styles.messageTime}>{formatTime(item.timestamp)}</Text>
+        </View>
+      </View>
+    );
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.header}>
-          <Image source={{ uri: friend.imageUri }} style={styles.friendImage} />
-          <Text style={styles.friendName}>
-            {friend.lastName} {friend.firstName}
-          </Text>
-        </View>
+      <View style={styles.messagesContainer}>
+        <FlatList
+          data={messages}
+          keyExtractor={(item) => item.timestamp.toString()}
+          renderItem={renderMessage}
+        />
       </View>
-
-      <FlatList
-        data={messages}
-        keyExtractor={(item) => item.id}
-        style={styles.list}
-        renderItem={({ item }) => (
-          <Text
-            style={
-              item.sender === 'user' ? styles.userMessage : styles.friendMessage
-            }
-          >
-            {item.text}
-          </Text>
-        )}
-      />
-      {isTyping && (
-        <Text style={styles.typingText}>{friend.firstName} is typing...</Text>
-      )}
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -95,7 +86,9 @@ const GroupChatScreen = ({ route }) => {
           onChangeText={setText}
           placeholder="Type a message"
         />
-        <Button title="Send" onPress={sendMessage} />
+        <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
+          <Text style={styles.sendButtonText}>Send</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -104,29 +97,30 @@ const GroupChatScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  messagesContainer: {
+    flex: 1,
     padding: 10,
-    paddingTop: '10%',
-    paddingBottom: '10%',
-  },
-  headerContainer: {
-    marginBottom: 20,
-  },
-  header: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  friendImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-  },
-  friendName: {
-    fontSize: theme.fonts.big.fontSize,
-    fontWeight: 'bold',
-    marginTop: 5,
   },
   list: {
-    paddingTop: '10%',
+    flex: 1,
+  },
+  messageBox: {
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 2,
+    maxWidth: '80%',
+  },
+  message: {
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 2,
+    borderWidth: 1,
+    borderColor: '#ccc',
+  },
+  currentUserMessage: {
+    backgroundColor: '#ddf',
+    alignSelf: 'flex-end',
   },
   inputContainer: {
     flexDirection: 'row',
@@ -139,25 +133,75 @@ const styles = StyleSheet.create({
     marginRight: 10,
     paddingHorizontal: 10,
   },
-  userMessage: {
+  currentUserMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#ddf',
+    marginVertical: 4,
+  },
+  otherUserMessage: {
+    alignSelf: 'flex-start',
+    marginVertical: 4,
+  },
+  currentUserMessageBox: {
+    padding: 10,
+    borderRadius: 10,
+    maxWidth: '80%',
+  },
+  otherUserMessageBox: {
+    padding: 10,
+    borderRadius: 10,
+    maxWidth: '80%',
+  },
+  message: {
     padding: 10,
     borderRadius: 10,
     marginVertical: 2,
-  },
-  friendMessage: {
+    marginRight: '20%',
+    maxWidth: '80%',
     alignSelf: 'flex-start',
-    backgroundColor: '#fdd',
+  },
+  senderName: {
+    fontWeight: 'bold',
+  },
+  messageValue: {
+    marginTop: 2,
+  },
+  messageTime: {
+    alignSelf: 'flex-end',
+    fontSize: 10,
+    opacity: 0.6,
+    marginTop: 4,
+  },
+  inputContainer: {
+    flexDirection: 'row',
     padding: 10,
-    borderRadius: 10,
-    marginVertical: 2,
+    borderTopWidth: 1,
+    borderColor: '#ccc',
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
-  typingText: {
-    alignSelf: 'flex-start',
-    marginVertical: 5,
-    marginLeft: 10,
-    fontStyle: 'italic',
+  input: {
+    flex: 1,
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    marginRight: 10,
+    fontSize: 16,
+    marginBottom: 20,
+  },
+  sendButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#000',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  sendButtonText: {
+    color: 'white',
+    fontSize: 16,
   },
 });
 
