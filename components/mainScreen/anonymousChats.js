@@ -32,7 +32,7 @@ const AnonymousGroupsScreen = ({ navigation }) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.friendContainer}
-            onPress={() => navigation.navigate('Chat', { friend: item })}
+            onPress={() => navigation.navigate('GroupChat', { friend: item })}
             activeOpacity={0.6}
           >
             <View style={styles.groupContainer}>
