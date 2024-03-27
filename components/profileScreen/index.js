@@ -12,22 +12,20 @@ import InterestsSection from './interestsSection';
 import ProfileSection from './profileSection';
 import theme from '../../theme';
 import { useSelector } from 'react-redux';
-import { getUserDetails } from '../../redux/selectors'
+import { getUserDetails } from '../../redux/selectors';
+import { useEvents } from '../../hooks/useEvents';
 
 const ProfileScreen = ({ navigation }) => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
   const userDetails = useSelector(getUserDetails);
+  const [events] = useEvents();
 
-  const { name, tag } = userDetails
+  const { name, tag } = userDetails;
 
   return (
     <View style={styles.fullScreen}>
       <ScrollView style={styles.container}>
-        <ProfileSection
-          username={name}
-          userTag={tag}
-          navigation={navigation}
-        />
+        <ProfileSection username={name} userTag={tag} navigation={navigation} />
         <InterestsSection interests={interests} setInterests={setInterests} />
         <EventSection events={mockedEvents} />
       </ScrollView>
