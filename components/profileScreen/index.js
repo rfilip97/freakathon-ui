@@ -18,7 +18,7 @@ import { useEvents } from '../../hooks/useEvents';
 const ProfileScreen = ({ navigation }) => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
   const userDetails = useSelector(getUserDetails);
-  const [events] = useEvents();
+  const { your_events: yourEvents }= useEvents();
 
   const { name, tag } = userDetails;
 
@@ -27,7 +27,7 @@ const ProfileScreen = ({ navigation }) => {
       <ScrollView style={styles.container}>
         <ProfileSection username={name} userTag={tag} navigation={navigation} />
         <InterestsSection interests={interests} setInterests={setInterests} />
-        <EventSection events={mockedEvents} />
+        <EventSection events={yourEvents} />
       </ScrollView>
       <TouchableOpacity
         style={styles.floatingButton}

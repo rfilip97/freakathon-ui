@@ -22,7 +22,7 @@ function useEvents() {
     getEvents();
   }, []);
 
-  return [events];
+  return events;
 }
 
 export { useEvents };

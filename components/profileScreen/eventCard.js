@@ -26,7 +26,7 @@ const EventCard = ({
           </Text>
           <Text style={styles.detailsRight}>
             <Text style={styles.emoji}>👥</Text>
-            {participants}
+            {participants}/6 joined
           </Text>
         </View>
       </View>

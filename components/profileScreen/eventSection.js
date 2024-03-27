@@ -7,7 +7,7 @@ const EventSection = ({ events }) => {
   return (
     <View style={styles.eventsSection}>
       <Text style={styles.sectionTitle}>Your Events:</Text>
-      {events.map((event, index) => (
+      {events && events.map((event, index) => (
         <EventCard
           key={index}
           title={event.title}
@@ -15,7 +15,7 @@ const EventSection = ({ events }) => {
           description={event.description}
           location={event.location}
           date={event.date}
-          participants={event.participants}
+          participants={event.attendants_count}
           joined={event.joined}
         />
       ))}
