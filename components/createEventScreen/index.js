@@ -12,6 +12,10 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import theme from '../../theme';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import EmojiSelector, { Categories } from 'react-native-emoji-selector';
+import { Repository } from '../../repository';
+import { useSelector } from 'react-redux';
+import { getUserDetails } from '../../redux/selectors'
 
 const CreateEventScreen = () => {
   const [eventName, setEventName] = useState('');
@@ -22,6 +26,10 @@ const CreateEventScreen = () => {
   const [isPublic, setIsPublic] = useState(true);
   const [errors, setErrors] = useState({});
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [emoji, setEmoji] = useState('');
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const userDetails = useSelector(getUserDetails);
+  const { token } = userDetails
 
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -55,7 +63,9 @@ const CreateEventScreen = () => {
 
   const handleSubmit = () => {
     if (validateFields()) {
-      // Submit data
+      params = {name: eventName, description, date, location, limit, emoji}
+
+      Repository.createEvent(token, params)
     }
   };
 
@@ -77,6 +87,18 @@ const CreateEventScreen = () => {
               value={eventName}
               onChangeText={setEventName}
             />
+          </View>
+        </View>
+
+        <View style={styles.inputWithErrorContainer}>
+          <View style={styles.inputContainer}>
+            <Icon name="emoticon-excited-outline" size={24} color="white" />
+            <TouchableOpacity
+              style={styles.emojiPickerTrigger}
+              onPress={() => setShowEmojiPicker(true)}
+            >
+              <Text style={styles.input}>{emoji || "Select an Emoji"}</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -169,6 +191,26 @@ const CreateEventScreen = () => {
       <TouchableOpacity style={styles.floatingButton} onPress={handleSubmit}>
         <Text style={styles.floatingButtonText}>Post</Text>
       </TouchableOpacity>
+
+      <Modal
+        visible={showEmojiPicker}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setShowEmojiPicker(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.emojiPickerContainer}>
+            <EmojiSelector
+              onEmojiSelected={emoji => {
+                setEmoji(emoji);
+                setShowEmojiPicker(false);
+              }}
+              showSearchBar={true}
+              category={Categories.all}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -277,6 +319,28 @@ const styles = StyleSheet.create({
   doneButtonText: {
     color: 'white',
     fontWeight: 'bold',
+  },
+  emojiPickerTrigger: {
+    flex: 1,
+    padding: 10,
+    color: 'white',
+    fontSize: theme.fonts.regular.fontSize,
+    justifyContent: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    marginBottom: -29
+  },
+  emojiPickerContainer: {
+    backgroundColor: 'white',
+    height: '50%',
+    width: '80%',
+    borderRadius: 10,
+    overflow: 'hidden',
+    paddingTop: 10,
   },
 });
 
