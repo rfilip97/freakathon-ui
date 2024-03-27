@@ -9,14 +9,15 @@ const EventSection = ({ events }) => {
       <Text style={styles.sectionTitle}>Your Events:</Text>
       {events && events.map((event, index) => (
         <EventCard
-          key={index}
+          key={event.id}
+          id={event.id}
           title={event.title}
           emoji={event.emoji}
           description={event.description}
           location={event.location}
           date={event.date}
           participants={event.attendants_count}
-          joined={event.joined}
+          joined={!event.can_attend}
         />
       ))}
     </View>

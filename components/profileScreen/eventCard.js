@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import theme from '../../theme';
 
 const EventCard = ({
+  id,
   title,
   description,
   emoji,
@@ -30,7 +31,7 @@ const EventCard = ({
           </Text>
         </View>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => console.log('ppppp ' + id)}>
         {joined ? (
           <View style={styles.cardFooterJoined}>
             <Text style={styles.footerText}>Joined on {date}</Text>
