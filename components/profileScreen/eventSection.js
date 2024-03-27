@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import EventCard from './eventCard';
 import theme from '../../theme';
 
-const EventSection = ({ events }) => {
+const EventSection = ({ events, refetchEvents }) => {
   return (
     <View style={styles.eventsSection}>
       <Text style={styles.sectionTitle}>Your Events:</Text>
@@ -18,6 +18,7 @@ const EventSection = ({ events }) => {
           date={event.date}
           participants={event.attendants_count}
           joined={!event.can_attend}
+          refetchEvents={refetchEvents}
         />
       ))}
     </View>

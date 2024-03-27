@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import theme from '../../theme';
+import { Repository } from '../../repository';
+import { useSelector } from 'react-redux';
+import { getUserDetails } from '../../redux/selectors';
 
 const EventCard = ({
   id,
@@ -11,7 +14,22 @@ const EventCard = ({
   participants,
   date,
   joined,
+  refetchEvents,
 }) => {
+  const userDetails = useSelector(getUserDetails);
+  const { token } = userDetails;
+
+  const joinEvent = async () => {
+    try {
+      const response = await Repository.joinEvent(token, id);
+      if (response) {
+        refetchEvents && refetchEvents();
+      }
+    } catch (error) {
+      console.error('Joining event failed:', error);
+    }
+  };
+
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
@@ -31,7 +49,7 @@ const EventCard = ({
           </Text>
         </View>
       </View>
-      <TouchableOpacity onPress={() => console.log('ppppp ' + id)}>
+      <TouchableOpacity onPress={joinEvent}>
         {joined ? (
           <View style={styles.cardFooterJoined}>
             <Text style={styles.footerText}>Joined on {date}</Text>

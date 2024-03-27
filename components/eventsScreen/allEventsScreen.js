@@ -18,7 +18,7 @@ const AllEventsScreen = () => {
   return (
     <View>
       <ScrollView>
-        <EventSection events={allEvents} />
+        <EventSection events={allEvents} refetchEvents={refetchEvents} />
       </ScrollView>
     </View>
   );
