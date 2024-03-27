@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Text,
   StyleSheet,
@@ -14,13 +14,21 @@ import theme from '../../theme';
 import { useSelector } from 'react-redux';
 import { getUserDetails } from '../../redux/selectors';
 import { useEvents } from '../../hooks/useEvents';
+import { useFocusEffect } from '@react-navigation/native';
 
 const ProfileScreen = ({ navigation }) => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
   const userDetails = useSelector(getUserDetails);
-  const { your_events: yourEvents }= useEvents();
+  const { events, refetchEvents } = useEvents();
+  const { your_events: yourEvents } = events;
 
   const { name, tag } = userDetails;
+
+  useFocusEffect(
+    useCallback(() => {
+      refetchEvents();
+    }, [refetchEvents])
+  );
 
   return (
     <View style={styles.fullScreen}>

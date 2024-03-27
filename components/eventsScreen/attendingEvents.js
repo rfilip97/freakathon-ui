@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   ScrollView
@@ -6,9 +6,17 @@ import {
 import EventSection from '../profileScreen/eventSection';
 import mockedAttendingEvents from './mockedAttendingEvents';
 import { useEvents } from '../../hooks/useEvents';
+import { useFocusEffect } from '@react-navigation/native';
 
 const AttendingEventsScreen = () => {
-  const { attending_events: attendingEvents }= useEvents();
+  const { events, refetchEvents } = useEvents();
+  const { attending_events: attendingEvents } = events;
+
+  useFocusEffect(
+    useCallback(() => {
+      refetchEvents();
+    }, [refetchEvents])
+  );
 
   return (
     <View>

@@ -15,9 +15,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import EmojiSelector, { Categories } from 'react-native-emoji-selector';
 import { Repository } from '../../repository';
 import { useSelector } from 'react-redux';
-import { getUserDetails } from '../../redux/selectors'
+import { getUserDetails } from '../../redux/selectors';
 
-const CreateEventScreen = () => {
+const CreateEventScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState('');
   const [date, setDate] = useState(new Date());
   const [location, setLocation] = useState('');
@@ -29,7 +29,7 @@ const CreateEventScreen = () => {
   const [emoji, setEmoji] = useState('');
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const userDetails = useSelector(getUserDetails);
-  const { token } = userDetails
+  const { token } = userDetails;
 
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -61,11 +61,26 @@ const CreateEventScreen = () => {
     return valid;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateFields()) {
-      params = {name: eventName, description, date, location, limit, emoji}
+      params = { name: eventName, description, date, location, limit, emoji };
 
-      Repository.createEvent(token, params)
+      try {
+        const response = await Repository.createEvent(token, params);
+        if (response && response.name) {
+          navigation.goBack();
+        } else {
+          const errorData = await response.json();
+          console.error(
+            'Event creation failed with status:',
+            response.status,
+            'and message:',
+            errorData.message
+          );
+        }
+      } catch (error) {
+        console.error('Event creation failed:', error);
+      }
     }
   };
 
@@ -97,7 +112,7 @@ const CreateEventScreen = () => {
               style={styles.emojiPickerTrigger}
               onPress={() => setShowEmojiPicker(true)}
             >
-              <Text style={styles.input}>{emoji || "Select an Emoji"}</Text>
+              <Text style={styles.input}>{emoji || 'Select an Emoji'}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -105,41 +120,37 @@ const CreateEventScreen = () => {
         <View style={styles.inputWithErrorContainer}>
           {errors.date && <Text style={styles.errorText}>{errors.date}</Text>}
           <View style={styles.inputContainer}>
-        <Icon name="calendar-range" size={24} color="#FFF" />
-        <TouchableOpacity
-          onPress={() => setShowDatePicker(true)}
-        >
-          <Text style={styles.input}>
-            {date.toLocaleDateString()}
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <Modal
-        visible={showDatePicker}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setShowDatePicker(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.datePickerContainer}>
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode="date"
-              display={Platform.OS === 'ios' ? 'inline' : 'calendar'}
-              onChange={onDateChange}
-              style={styles.datePicker}
-            />
-            <TouchableOpacity
-              style={styles.doneButton}
-              onPress={() => setShowDatePicker(false)}
-            >
-              <Text style={styles.doneButtonText}>Done</Text>
+            <Icon name="calendar-range" size={24} color="#FFF" />
+            <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+              <Text style={styles.input}>{date.toLocaleDateString()}</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </Modal>
+
+          <Modal
+            visible={showDatePicker}
+            transparent={true}
+            animationType="slide"
+            onRequestClose={() => setShowDatePicker(false)}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.datePickerContainer}>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode="date"
+                  display={Platform.OS === 'ios' ? 'inline' : 'calendar'}
+                  onChange={onDateChange}
+                  style={styles.datePicker}
+                />
+                <TouchableOpacity
+                  style={styles.doneButton}
+                  onPress={() => setShowDatePicker(false)}
+                >
+                  <Text style={styles.doneButtonText}>Done</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
         </View>
 
         <View style={styles.inputWithErrorContainer}>
@@ -201,7 +212,7 @@ const CreateEventScreen = () => {
         <View style={styles.modalContainer}>
           <View style={styles.emojiPickerContainer}>
             <EmojiSelector
-              onEmojiSelected={emoji => {
+              onEmojiSelected={(emoji) => {
                 setEmoji(emoji);
                 setShowEmojiPicker(false);
               }}
@@ -332,7 +343,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    marginBottom: -29
+    marginBottom: -29,
   },
   emojiPickerContainer: {
     backgroundColor: 'white',

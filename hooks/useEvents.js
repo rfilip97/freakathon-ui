@@ -1,13 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Repository } from '../repository';
 import { useSelector } from 'react-redux';
-import { getUserDetails } from '../redux/selectors'
+import { getUserDetails } from '../redux/selectors';
 
 function useEvents() {
   const [events, setEvents] = useState([]);
+  const [refetchIndex, setRefetchIndex] = useState(0);
   const userDetails = useSelector(getUserDetails);
+  const { token } = userDetails;
 
-  const { token } = userDetails
+  const refetchEvents = useCallback(() => {
+    setRefetchIndex((prevIndex) => prevIndex + 1);
+  }, []);
 
   useEffect(() => {
     const getEvents = async () => {
@@ -20,9 +24,9 @@ function useEvents() {
     };
 
     getEvents();
-  }, []);
+  }, [token, refetchIndex]);
 
-  return events;
+  return { events, refetchEvents };
 }
 
 export { useEvents };
