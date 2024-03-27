@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
-  Text,
-  Button,
-  StyleSheet,
-  Image,
-  ActivityIndicator,
   ScrollView
 } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import EventSection from '../profileScreen/eventSection';
 import mockedYourEvents from './mockedYourEvents';
-
-const Tab = createMaterialTopTabNavigator();
+import { useEvents } from '../../hooks/useEvents';
 
 const YourEventsScreen = () => {
+  const { your_events: yourEvents }= useEvents();
+
   return (
     <View>
       <ScrollView >
-        <EventSection events={mockedYourEvents } />
+        <EventSection events={yourEvents} />
       </ScrollView>
     </View>
   );
