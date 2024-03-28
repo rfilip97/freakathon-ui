@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
+import theme from '../../theme'
 
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
@@ -12,8 +13,8 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>BuzzBuddy</Text>
-      <Image style={styles.logo} source={require('../../assets/peeps.png')} />
+      {/* <Text style={styles.title}>BuzzBuddy</Text> */}
+      <Image style={styles.logo} source={require('../../assets/logo.png')} />
     </View>
   );
 };
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.primary,
     padding: '12%',
   },
   title: {
