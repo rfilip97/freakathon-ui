@@ -18,14 +18,7 @@ const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  const redirectToMainTabs = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'MainTabs' }],
-    });
-  };
-
-  const [authState, register] = useRegister(redirectToMainTabs);
+  const [authState, register] = useRegister(() => navigation.goBack());
 
   const handleRegister = () => {
     if (password !== passwordConfirm) {
