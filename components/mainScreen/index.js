@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -6,9 +6,34 @@ import theme from '../../theme';
 import image from '../../assets/peepos.png';
 import AnonymousGroups from './anonymousChats';
 
+import { Repository } from '../../repository';
+import { useSelector } from 'react-redux';
+import { getUserDetails } from '../../redux/selectors';
+import { useFocusEffect } from '@react-navigation/native';
+
 const MainScreen = ({ navigation }) => {
+//////// TEMP ////////
+  const userDetails = useSelector(getUserDetails);
+  const { id, token } = userDetails;
+
+  const getFriends = async () => {
+    try {
+      const response = await Repository.getFriends(token, id);
+      if (response) {
+        const friends = response.items[0].friend_list.map(
+          (friend) => friend.name
+        );
+        setHaveActiveChat(friends.length > 0)
+      }
+    } catch (error) {}
+  };
+
+  useFocusEffect(() => {
+    getFriends();
+  });
+//////// TEMP ////////
   const [isSearching, setIsSearching] = useState(false);
-  const [haveActiveChat, setHaveActiveChat] = useState(true);
+  const [haveActiveChat, setHaveActiveChat] = useState(false);
 
   const handlePress = () => {
     setIsSearching(true);
