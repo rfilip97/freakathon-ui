@@ -21,7 +21,7 @@ function generateUserObjects(names) {
       imageUri: `https://picsum.photos/200?random=${index + 1}`,
       status: 'offline',
       firstName: firstName,
-      lastName: lastName
+      lastName: lastName,
     };
   });
 }
@@ -29,23 +29,30 @@ function generateUserObjects(names) {
 const FriendListScreen = ({ navigation }) => {
   const userDetails = useSelector(getUserDetails);
   const { id, token } = userDetails;
-  const [friends, setFriends] = useState([])
+  const [friends, setFriends] = useState([]);
+  const [pendingFriends, setPendingFriends] = useState([]);
 
   const getFriends = async () => {
     try {
       const response = await Repository.getFriends(token, id);
       if (response) {
-      const friends = response.items[0].friend_list.map((friend) => friend.name)
-      const friendsData = generateUserObjects(friends)
-      setFriends(friendsData)
+        const friends = response.items[0].friend_list.map(
+          (friend) => friend.name
+        );
+        const friendsData = generateUserObjects(friends);
+        setFriends(friendsData);
+
+        const pendingFriends = response.items[0].pending_list;
+        setPendingFriends(pendingFriends);
+
+        console.log('aaaaaa ' + JSON.stringify(pendingFriends));
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
-    getFriends()
-  }, [])
+    getFriends();
+  }, []);
 
   const sortedFriends = [...friends].sort((a, b) => {
     if (a.status === 'online' && b.status === 'offline') {
@@ -84,19 +91,43 @@ const FriendListScreen = ({ navigation }) => {
     </TouchableOpacity>
   );
 
+  const renderPendingFriend = ({ item }) => (
+    <View style={styles.pendingFriendContainer}>
+      <View style={styles.pendingFriendLeftSide}>
+      <Image source={{ uri: `https://picsum.photos/200?random=${item.id}` }} style={styles.friendImage} />
+      <Text style={styles.pendingFriendName}>{item.name}</Text>
+      </View>
+      <TouchableOpacity
+        style={styles.acceptButton}
+        onPress={() => {/* handle accept friend request logic here */}}
+      >
+        <Text style={styles.acceptButtonText}>Accept</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
+      <Text style={styles.sectionTitle}>Friends</Text>
       <FlatList
         data={sortedFriends}
         renderItem={renderFriend}
-        keyExtractor={(item) => item.id}
+        style={{ maxHeight: 10 * sortedFriends.length }}
+        keyExtractor={(item) => `${item.id}`}
       />
 
+      <Text style={styles.sectionTitle}>Friend Requests</Text>
+      <FlatList
+        data={pendingFriends}
+        renderItem={renderPendingFriend}
+        keyExtractor={(item) => item.id}
+        ListEmptyComponent={<Text>No pending friend requests</Text>}
+      />
       <FAB
         style={styles.fab}
         small
         icon="plus"
-        onPress={() => navigation.navigate('FindFriends')} // Make sure you have a FindFriends route defined in your navigator
+        onPress={() => navigation.navigate('FindFriends')}
       />
     </View>
   );
@@ -105,13 +136,13 @@ const FriendListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.secondary
+    backgroundColor: theme.colors.secondary,
   },
   friendContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: theme.colors.secondary
+    backgroundColor: theme.colors.secondary,
   },
   friendImage: {
     width: 50,
@@ -154,6 +185,34 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'white',
   },
+  pendingFriendContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', 
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  statusContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 16, 
+  },
+  friendInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  pendingFriendLeftSide: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  sectionTitle: {
+    fontWeight: 'bold',
+    fontSize: theme.fonts.large.fontSize,
+    paddingLeft: 10,
+    paddingTop: 10
+  }
 });
 
 export default FriendListScreen;
