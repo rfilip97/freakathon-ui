@@ -8,16 +8,29 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; // Ensure you have this installed
+import { MaterialIcons } from '@expo/vector-icons';
 import theme from '../../../theme';
+import { Repository } from '../../../repository';
+import { useSelector } from 'react-redux';
+import { getUserDetails } from '../../../redux/selectors';
 
 const FindFriendsScreen = ({ navigation }) => {
   const [inputValue, setInputValue] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [found, setFound] = useState(false);
   const [inviteSent, setInviteSent] = useState(false);
+  const userDetails = useSelector(getUserDetails);
+  const { token } = userDetails;
 
-  const handleSearch = () => {
-    setFound(true);
+  const handleSearch = async () => {
+    try {
+      const response = await Repository.searchFriend(token, inputValue);
+      if (response) {
+        setDisplayName(inputValue);
+        setFound(true);
+      }
+    } catch (error) {
+    }
   };
 
   return (
@@ -47,7 +60,7 @@ const FindFriendsScreen = ({ navigation }) => {
               style={styles.image}
             />
           </View>
-          <Text style={styles.tagText}>@{inputValue}</Text>
+          <Text style={styles.tagText}>@{displayName}</Text>
           <TouchableOpacity style={styles.addButton}>
             {inviteSent === true ? (
               <MaterialIcons
