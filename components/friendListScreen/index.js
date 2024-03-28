@@ -112,7 +112,7 @@ const FriendListScreen = ({ navigation }) => {
       <FlatList
         data={friends}
         renderItem={renderFriend}
-        style={{ maxHeight: 100 * friends.length }}
+        style={{ maxHeight: 70 * friends.length }}
         keyExtractor={(item) => `${item.id}`}
       />
 
