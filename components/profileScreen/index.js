@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { getUserDetails } from '../../redux/selectors';
 import { useEvents } from '../../hooks/useEvents';
 import { useFocusEffect } from '@react-navigation/native';
+import { Repository } from '../../repository';
 
 const ProfileScreen = ({ navigation }) => {
   const [interests, setInterests] = useState(['Music', 'Sports', 'Coding']);
@@ -22,13 +23,30 @@ const ProfileScreen = ({ navigation }) => {
   const { events, refetchEvents } = useEvents();
   const { your_events: yourEvents } = events;
 
-  const { name, tag } = userDetails;
+  const { name, id, tag, token } = userDetails;
 
   useFocusEffect(
     useCallback(() => {
       refetchEvents();
+      getFriends();
     }, [refetchEvents])
   );
+
+//////// TEMP ////////
+const getFriends = async () => {
+  try {
+    const response = await Repository.getFriends(token, id);
+    if (response) {
+      const friends = response.items[0].friend_list.map(
+        (friend) => friend.name
+      );
+
+      console.log('zzzz ' + JSON.stringify(friends))
+      friends.length == 0 && setInterests([])
+    }
+  } catch (error) {}
+};
+//////// TEMP ////////
 
   return (
     <View style={styles.fullScreen}>
