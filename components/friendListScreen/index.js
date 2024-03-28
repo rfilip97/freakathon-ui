@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,32 +9,44 @@ import {
 } from 'react-native';
 import { FAB } from 'react-native-paper';
 import theme from '../../theme';
+import { Repository } from '../../repository';
+import { useSelector } from 'react-redux';
+import { getUserDetails } from '../../redux/selectors';
 
-export const friends = [
-  {
-    id: '1',
-    firstName: 'Daniel',
-    lastName: 'Mocanu',
-    status: 'online',
-    imageUri: 'https://picsum.photos/200',
-  },
-  {
-    id: '2',
-    firstName: 'Michael',
-    lastName: 'Jackson',
-    status: 'offline',
-    imageUri: 'https://picsum.photos/201',
-  },
-  {
-    id: '3',
-    firstName: 'Catgirl',
-    lastName: 'Ur',
-    status: 'online',
-    imageUri: 'https://picsum.photos/202',
-  },
-];
+function generateUserObjects(names) {
+  return names.map((name, index) => {
+    const [firstName, lastName] = name.split(' ');
+    return {
+      id: index + 1,
+      imageUri: `https://picsum.photos/200?random=${index + 1}`,
+      status: 'offline',
+      firstName: firstName,
+      lastName: lastName
+    };
+  });
+}
 
 const FriendListScreen = ({ navigation }) => {
+  const userDetails = useSelector(getUserDetails);
+  const { id, token } = userDetails;
+  const [friends, setFriends] = useState([])
+
+  const getFriends = async () => {
+    try {
+      const response = await Repository.getFriends(token, id);
+      if (response) {
+      const friends = response.items[0].friend_list.map((friend) => friend.name)
+      const friendsData = generateUserObjects(friends)
+      setFriends(friendsData)
+      }
+    } catch (error) {
+    }
+  };
+
+  useEffect(() => {
+    getFriends()
+  }, [])
+
   const sortedFriends = [...friends].sort((a, b) => {
     if (a.status === 'online' && b.status === 'offline') {
       return -1;
