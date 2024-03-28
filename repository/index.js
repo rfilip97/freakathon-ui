@@ -5,6 +5,7 @@ import createEvent from './events/createEvent';
 import joinEvent from './events/joinEvent';
 import searchFriend from './users/searchFriend';
 import getFriends from './users/getFriends';
+import sendFriendRequest from './users/sendFriendRequest';
 
 export const Repository = {
   login,
@@ -13,5 +14,6 @@ export const Repository = {
   createEvent,
   joinEvent,
   searchFriend,
-  getFriends
+  getFriends,
+  sendFriendRequest
 };

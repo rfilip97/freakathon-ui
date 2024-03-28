@@ -17,6 +17,7 @@ import { getUserDetails } from '../../../redux/selectors';
 const FindFriendsScreen = ({ navigation }) => {
   const [inputValue, setInputValue] = useState('');
   const [displayName, setDisplayName] = useState('');
+  const [friendId, setFriendId] = useState('')
   const [found, setFound] = useState(false);
   const [inviteSent, setInviteSent] = useState(false);
   const userDetails = useSelector(getUserDetails);
@@ -26,11 +27,20 @@ const FindFriendsScreen = ({ navigation }) => {
     try {
       const response = await Repository.searchFriend(token, inputValue);
       if (response) {
+        setFriendId(response.id)
         setDisplayName(inputValue);
         setFound(true);
       }
-    } catch (error) {
-    }
+    } catch (error) {}
+  };
+
+  const sendInvite = async () => {
+    try {
+      const response = await Repository.sendFriendRequest(token, friendId);
+      if (response) {
+        setInviteSent(true);
+      }
+    } catch (error) {}
   };
 
   return (
@@ -67,10 +77,14 @@ const FindFriendsScreen = ({ navigation }) => {
                 name="check"
                 size={24}
                 color={theme.colors.primary}
-                onPress={() => setInviteSent(false)}
+                onPress={() => {
+                  setInviteSent(false);
+                }}
               />
             ) : (
-              <Text style={styles.addButtonText} onPress={() => setInviteSent(true)}>+</Text>
+              <Text style={styles.addButtonText} onPress={sendInvite}>
+                +
+              </Text>
             )}
           </TouchableOpacity>
         </View>
