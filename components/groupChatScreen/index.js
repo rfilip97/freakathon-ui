@@ -9,23 +9,28 @@ import {
   Image,
 } from 'react-native';
 
+import { useSelector } from 'react-redux';
+import { getUserDetails } from '../../redux/selectors';
+
 const GroupChatScreen = () => {
   const [messages, setMessages] = useState([
     {
       timestamp: Date.now() - 3000,
       sender: 'FluffyBear92',
       value: 'Hey there!',
-      color: '#DFF8C8',
+      color: '#FFD700',
     },
     {
       timestamp: Date.now() - 2000,
       sender: 'HappyFrog56',
       value: "Hello, my new friends! I'm happy to meet you. What's up?",
-      color: '#FED8B1',
+      color: '#008000',
     },
   ]);
+  const userDetails = useSelector(getUserDetails);
+  const { tag } = userDetails;
   const [text, setText] = useState('');
-  const currentUser = 'SlyFox43';
+  const currentUser = tag;
   const flatListRef = useRef(null);
 
   useEffect(() => {
@@ -109,6 +114,9 @@ const GroupChatScreen = () => {
 };
 
 const ChatHeader = () => {
+  const userDetails = useSelector(getUserDetails);
+  const { tag } = userDetails;
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.imagesOverlapContainer}>
@@ -150,7 +158,7 @@ const ChatHeader = () => {
         </View>
       </View>
       <Text style={styles.descriptionText}>
-        One day, SlyFox43 met HappyFrog56 and FluffyBear92 in the forest, and
+        One day, {tag} met HappyFrog56 and FluffyBear92 in the forest, and
         this was the beginning of a long friendship.
       </Text>
     </View>
