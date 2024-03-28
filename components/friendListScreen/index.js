@@ -44,8 +44,6 @@ const FriendListScreen = ({ navigation }) => {
 
         const pendingFriends = response.items[0].pending_list;
         setPendingFriends(pendingFriends);
-
-        console.log('aaaaaa ' + JSON.stringify(pendingFriends));
       }
     } catch (error) {}
   };
@@ -54,15 +52,14 @@ const FriendListScreen = ({ navigation }) => {
     getFriends();
   }, []);
 
-  const sortedFriends = [...friends].sort((a, b) => {
-    if (a.status === 'online' && b.status === 'offline') {
-      return -1;
-    }
-    if (a.status === 'offline' && b.status === 'online') {
-      return 1;
-    }
-    return 0;
-  });
+  const acceptFriendRequest = async (friendId) => {
+    try {
+      const response = await Repository.acceptFriendRequest(token, friendId);
+      if (response) {
+        getFriends();
+      }
+    } catch (error) {}
+  };
 
   const renderFriend = ({ item }) => (
     <TouchableOpacity
@@ -94,12 +91,15 @@ const FriendListScreen = ({ navigation }) => {
   const renderPendingFriend = ({ item }) => (
     <View style={styles.pendingFriendContainer}>
       <View style={styles.pendingFriendLeftSide}>
-      <Image source={{ uri: `https://picsum.photos/200?random=${item.id}` }} style={styles.friendImage} />
-      <Text style={styles.pendingFriendName}>{item.name}</Text>
+        <Image
+          source={{ uri: `https://picsum.photos/200?random=${item.id}` }}
+          style={styles.friendImage}
+        />
+        <Text style={styles.pendingFriendName}>{item.name}</Text>
       </View>
       <TouchableOpacity
         style={styles.acceptButton}
-        onPress={() => {/* handle accept friend request logic here */}}
+        onPress={() => acceptFriendRequest(item.id)}
       >
         <Text style={styles.acceptButtonText}>Accept</Text>
       </TouchableOpacity>
@@ -110,9 +110,9 @@ const FriendListScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Friends</Text>
       <FlatList
-        data={sortedFriends}
+        data={friends}
         renderItem={renderFriend}
-        style={{ maxHeight: 10 * sortedFriends.length }}
+        style={{ maxHeight: 100 * friends.length }}
         keyExtractor={(item) => `${item.id}`}
       />
 
@@ -121,7 +121,11 @@ const FriendListScreen = ({ navigation }) => {
         data={pendingFriends}
         renderItem={renderPendingFriend}
         keyExtractor={(item) => item.id}
-        ListEmptyComponent={<Text>No pending friend requests</Text>}
+        ListEmptyComponent={
+          <Text style={{ paddingLeft: 20, paddingTop: 10 }}>
+            No pending friend requests
+          </Text>
+        }
       />
       <FAB
         style={styles.fab}
@@ -187,7 +191,7 @@ const styles = StyleSheet.create({
   },
   pendingFriendContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between', 
+    justifyContent: 'space-between',
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
@@ -196,7 +200,7 @@ const styles = StyleSheet.create({
   statusContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 16, 
+    marginLeft: 16,
   },
   friendInfo: {
     flexDirection: 'row',
@@ -211,8 +215,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: theme.fonts.large.fontSize,
     paddingLeft: 10,
-    paddingTop: 10
-  }
+    paddingTop: 10,
+  },
 });
 
 export default FriendListScreen;
