@@ -33,7 +33,7 @@ const LandingPage = () => {
       <View style={styles.lowerHalf}>
         <Text style={styles.description}>
           In the bustling rhythm of life, finding time to catch up with friends
-          can be a challenge. That's where Meety comes in — the app designed to
+          can be a challenge. That's where Linking Locals comes in — the app designed to
           simplify the way we plan and enjoy gatherings.
         </Text>
         <Text style={styles.tagline}>Connect, Plan, and Meet 😃</Text>
